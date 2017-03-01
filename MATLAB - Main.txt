@@ -1,0 +1,1025 @@
+--------------------------------------------------
+MATLAB
+--------------------------------------------------
+++++++++++
+Contents
+++++++++++
+Overview
+Study Notes (at MathWorks)
+    --------------------------------------------------------
+    MATLAB Panels
+    MATLAB Designed for Matrices
+    Variables as Arrays
+    Arrays as Matrices
+    Arrays as Vectors
+    Long/Short Display Format
+    Element-wise Operations
+    Array Concatenation
+    Complex Numbers
+    Array Indexing
+    Extending Array Size
+    Listing Workspace Variables
+    Saving/Loading Workspace Variables
+    Text and Characters
+    Calling Functions
+    Accepting Function Outputs
+    2D Plotting
+    2D Plotting with Line Specification
+    Line Specification
+    3D Plotting
+    Adding New Plots to Existing Plots
+    Programming and Scripts
+    Loops and Conditional Statements
+    Help and Documentation
+    --------------------------------------------------------
+    --------------------------------------------------------
+Function List
+Code Snippets
+Toolbox - Psychtoolbox
+References
+    MATLAB - MathWorks
+    MATLAB - Wikipedia
+    MATLAB Documentation - MathWorks
+    MATLAB Academy - MathWorks
+    MATLAB - Tutorials Point
+    MATLAB Programming - Wikibooks
+    MATLAB Installation Information (Sample)
+    Psychtoolbox
+    Psychtoolbox - Wikipedia
+    Psychtoolbox Documentation
+    Psychtoolbox Tutorial
+
+========================================
+Xxxxx Xxxxx Xxxxx
+========================================
+++++++++++
+Contents
+++++++++++
+============================================================
+Xxxxx Xxxxx Xxxxx
+============================================================
+--------------------------------------------------------------------------------
+
+Note: Unless otherwise specified, all content is based on MATLAB R2016b.
+
+========================================
+Overview
+========================================
+- MATLAB is an abbreviation for MATrix LABoratory.
+- MATLAB is a multi-paradigm numerical computing environment and a programming language. (多范式、多范型)
+- MATLAB allows the following features.
+  - Matrix Manipulations            控制矩阵
+  - Plotting of Functions and Data  绘制函数和数据
+  - Implementation of Algorithms    实现算法
+  - Creation of User Interfaces     创建用户界面
+  - Interfacing with Programs Written in Other Languages (such as C, C++, C#, Java, Fortran and Python)
+                                    连接其他语言编写的程序（如C、C++、C#、Java、Fortran和Python）
+- MATLAB is adopted in domains as follows.
+  - Machine Learning                机器学习
+  - Signal Processing               信号处理
+  - Image Processing                图像处理
+  - Computer Vision                 计算机视觉
+  - Communications                  通讯
+  - Computational Finance           计算金融
+  - Control Design                  控制设计
+  - Robotics                        机器人技术
+  - Education (especially Linear Algebra and Numerical Analysis)
+                                    教育（特别是线性代数和数值分析）
+  - etc.                            其他
+- MATLAB is developed by MathWorks and it is proprietary.
+
+========================================
+Study Notes (at MathWorks)
+========================================
+MATLAB Documentation - MathWorks
+https://www.mathworks.com/help/matlab
+
+++++++++++
+Contents
+++++++++++
+Section                                     Description
+------------------------------------------------------------------------------------------------------------------------
+[X] Getting Started                         Describe the basics of MATLAB.
+[>] Language Fundamentals                   Describe the syntax, operators, data types, array indexing and manipulation of MATLAB.
+[ ] Mathematics                             Describe realizing linear algebra, differentiation and integrals, Fourier transforms, and other mathematics using MATLAB.
+[ ] Graphics                                Describe realizing 2D/3D plots, images, animation and visualization using MATLAB.
+[ ] Data Import and Analysis                Describe the data's import and export, preprocessing and visual exploration in MATLAB.
+[ ] Programming Scripts and Functions       Describe the program files, control flow, editing and debugging in MATLAB.
+[ ] App Building                            Describe the App development using GUIDE, App Designer, or a programmatic workflow in MATLAB.
+[ ] Advanced Software Development           Describe the object-oriented programming, code performance, unit testing, external interfaces to Java , C/C++, .NET and other languages in MATLAB.
+[ ] Desktop Environment                     Describe the preferences and settings, and platform differences in MATLAB.
+[ ] Supported Hardware                      Describe the support for third-party hardware, such as webcam, Arduino, and Raspberry Pi, from MATLAB.
+
+Getting Started
+https://www.mathworks.com/help/matlab/getting-started-with-matlab.html
+------------------------------------------------------------------------------------------------------------------------
+[X] Desktop Basics
+[X] Matrices and Arrays
+[X] Array Indexing
+[X] Workspace Variables
+[X] Text and Characters
+[X] Calling Functions
+[X] 2D/3D Plots
+[X] Programming and Scripts
+[X] Help and Documentation
+
+Language Fundamentals
+https://www.mathworks.com/help/matlab/language-fundamentals.html
+------------------------------------------------------------------------------------------------------------------------
+[X] Entering Commands
+[>] Matrices and Arrays
+[ ] Operators and Elementary Operations
+[ ] Special Characters
+[ ] Data Types
+
+++++++++++++++++++++
+Contents (Points)
+++++++++++++++++++++
+MATLAB Panels
+MATLAB Designed for Matrices
+Variables as Arrays
+Arrays as Matrices
+Arrays as Vectors
+Long/Short Display Format
+Element-wise Operations
+Array Concatenation
+Complex Numbers
+Array Indexing
+Extending Array Size
+Listing Workspace Variables
+Saving/Loading Workspace Variables
+Text and Characters
+Calling Functions
+Accepting Function Outputs
+2D Plotting
+2D Plotting with Line Specification
+Line Specification
+3D Plotting
+Adding New Plots to Existing Plots
+Programming and Scripts
+Loops and Conditional Statements
+Help and Documentation
+Entering the Commands
+Formatting Output
+Continuing Long Statements on Multiple Lines
+Creating Shortcuts
+Stopping a Command's Execution
+Finding Functions
+Finding Text
+Checking Syntax as Typing
+Writing to a Diary File
+Variable Names
+Case and Space Sensitivity
+Command Syntax vs. Function Syntax
+
+- MATLAB Panels
+  MATLAB contains the following panels.
+    - Command Window    : Allow to enter commands.
+    - Command History   : Allow to see and use commands run.
+    - Workspace         : Allow to explore data.
+    - Current Folder    : Allow to access files.
+
+- MATLAB Designed for Matrices
+  While other programming languages mostly work with numbers one at a time, MATLAB is designed to operate primarily on whole matrices and arrays.
+
+- Variables as Arrays
+  All MATLAB variables are multi-dimensional arrays, no matter what type of data.
+
+- Arrays as Matrices
+  A matrix is a 2D array.
+
+- Arrays as Vectors
+  Vectors are special arrays.
+    A Row Vector
+        1 2 3
+    A Column Vector
+        1
+        2
+        3
+
+- Long/Short Display Format
+  MATLAB stores numbers as floating-point values, and arithmetic operations are sensitive to small differences between the actual value and its floating-point representation.
+  By default, MATLAB displays numbers in the short format (4 digits after the decimal point).
+  To see the numbers in the long format (15 digits after the decimal point), use the command "format long".
+  To see the numbers in the short format again, use the command "format short".
+    Display Using the Short Format (default)
+        0.4240  0.2625  0.9289
+        0.5079  0.8000  0.7303
+        0.0855  0.0292  0.4800
+
+    Display Using the Long Format
+        0.424000000000000   0.262482234698333   0.928854139478045
+        0.507858284661118   0.800000000000000   0.730330862855453
+        0.085515797090044   0.029220277562146   0.480000000000000
+
+- Element-wise Operations
+  To perform element-wise multiplication or division or power rather than matrix multiplication or division or power,
+  use the .* or ./ or .^ operator instead of the * or / or ^ operator.
+    e.g.
+        x
+            1   2
+            3   4
+
+        y
+            5   6
+            7   8
+
+        x * y           Matrix Multiplication
+            19  22
+            43  50
+
+        x .* y          Element-wise Multiplication
+            5   12
+            21  32
+
+        y / x           Matrix Division
+            -1.0000    2.0000
+            -2.0000    3.0000
+
+        y ./ x          Element-wise Division
+            5.0000    3.0000
+            2.3333    2.0000
+
+        x ^ 3           Matrix Power
+            37    54
+            81   118
+
+        x .^ 3          Element-wise Power
+            1     8
+            27    64
+
+- Array Concatenation
+  Arrays can be concatenated to make a larger array, by a pair of brackets ([]).
+    e.g.
+        x = [1 2 3]
+        y = [x 4 5 6]
+        z = [x y]
+
+        array1 = [1 2 3]
+        array2 = [4 5]
+        array3 = [4 5 6]
+        [array1 array2]                         Horizontal Concatenation
+        [array1, array2]                        Horizontal Concatenation
+        [array1; array3]                        Vertical Concatenation
+
+        [1 2 3 4; rand(2, 4); 5 6 7 8]
+
+- Complex Numbers
+  Complex numbers have both real and imaginary parts, where the imaginary unit is the square root of -1.
+    sqrt(-1) -----> 0.0000 + 1.0000i
+
+  Use either i or j to represent the imaginary part of complex numbers.
+    e.g.
+        c = [3 + 4i, 4 + 3j; -i, 10j]
+
+- Array Indexing
+  There are 2 approaches to refer to a particular element in an array.
+
+  Assuming there is an array named A as follows.
+    1   2   3   4
+    5   6   7   8
+    9   10  11  12
+    13  14  15  16
+
+  1. Use the Syntax - A(X, Y).
+     A is the array's name, X and Y are the particular element's row and column indexes.
+     A(3, 2) -----> 10
+
+  2. Use the Syntax - A(M).
+     A is the array's name, M is the particular element's index when traversing down each column in order.
+     A(7) -----> 10
+     Note: This approach is also called "linear indexing".
+
+- Extending Array Size
+  Referring to an element outside the array causes the "Index Exceeds Matrix Dimensions" error.
+
+  Assuming there is an array named A as follows.
+    1   2   3
+    4   5   6
+    7   8   9
+
+  A(3, 4) -----> Index exceeds matrix dimensions.
+
+  But assigning an element outside the array runs normally and extends the array's size.
+  And the new elements except the specified one will have a default value as 0.
+
+  A(3, 4) = 10
+  extends the array A's size from 3x3 to 3x4.
+    1   2   3   0
+    4   5   6   0
+    7   8   9   10
+
+  A(5, 2) = 12
+  extends the array A's size again from 3x4 to 5x4.
+    1   2   3   0
+    4   5   6   0
+    7   8   9   10
+    0   0   0   0
+    0   12  0   0
+
+- Listing Workspace Variables
+  The command "whos" lists variables in workspace, with sizes and types.
+
+  Assuming the following commands have been executed.
+    array1 = rand(3)
+    array2 = [3 + 4i, 4 + 3j; -i, 10j]
+    array3 = rand(3, 5, 2)
+    array4 = 'ABC'
+
+  Then executing the command "whos" returns a result as follows.
+    Name        Size             Bytes  Class     Attributes
+    array1      3x3                 72  double
+    array2      2x2                 64  double    complex
+    array3      3x5x2              240  double
+    array4      1x3                  6  char
+
+  And executing the command "whos array1" returns a result as follows.
+    Name        Size             Bytes  Class     Attributes
+    array1      3x3                 72  double
+
+- Saving/Loading Workspace Variables
+  Workspace variables do not persist after exiting MATLAB.
+  Using the "save" and "load" commands to save and load workspace variables into/from MAT-files (.mat).
+    Command                     Description
+    --------------------------------------------------------------------------------------------------------------------
+    save data
+    OR
+    save('data.mat')            Save all variables in the workspace into the MAT-file named "data.mat".
+
+    save data array1
+    OR
+    save('data.mat', 'array1')  Save the variable "array1" in the workspace into the MAT-file named "data.mat".
+
+    save data array1 array2
+    OR
+    save('data3.mat', 'array1', 'array2')
+                                Save the variables "array1" and "array2" in the workspace into the MAT-file named "data.mat".
+
+    load data
+    OR
+    load('data.mat')            Load all variables in the MAT-file named "data.mat" into the workspace.
+
+    load data array1
+    OR
+    load('data.mat', 'array1')  Load the variable "array1" in the MAT-file named "data.mat" into the workspace.
+
+    load data array1 array2
+    OR
+    load('data.mat', 'array1', 'array2')
+                                Load the variables "array1" and "array2" in the MAT-file named "data.mat" into the workspace.
+
+- Text and Characters
+  - Enclosing a sequence of character in a pair of single quotes ('') creates a text.
+    e.g. someText = 'Hello, World!'
+
+  - Using 2 single quotes in a text to escape a single quote.
+    e.g. someText = 'You''re right.'
+
+  - All texts are arrays which class (or say "data type") is "char" (short for "character").
+
+  - Character arrays can be concatenated like the numeric arrays, using a pair of brackets ([]).
+    e.g.
+        someText1 = 'Hi, ';
+        someText2 = 'beautiful Tee, ';
+        [someText1 someText2 'welcome to the MATLAB world!']
+
+        Hi, beautiful Tee, welcome to the MATLAB world!
+
+  - Numeric values can be converted to characters, using functions such as "num2str" or "int2str".
+    e.g.
+        birthYear = 1977;
+        age = 40;
+        ['Ray was born in ', num2str(birthYear), ', and his age is nearly ', int2str(age), ' now.']
+
+        Ray was born in 1977, and his age is nearly 40 now.
+
+    e.g.
+        temperatureAsFahrenheit = 71;
+        temperatureAsCelsius = (temperatureAsFahrenheit - 32) / 1.8;
+        ['The temperature is ' num2str(temperatureAsCelsius) ' C.']
+
+        The temperature is 21.6667 C.
+
+- Calling Functions
+  The syntax to call a function is: F(A1, A2, ..., An).
+  F is the function's name.
+  A1, A2 and An are the names of the function's arguments.
+  A function can have no arguments.
+
+    e.g.
+        clear
+        OR
+        clear()                                     Call a function with no arguments.
+        rand(3)                                     Call a function with 1 argument.
+        load('data.mat', 'array1')                  Call a function with 2 arguments.
+        plot(x, y, 'rs')                            Call a function with 3 arguments.
+
+- Accepting Function Outputs
+  If a function returns a single output, that output can be assigned to a variable;
+  if a function returns multiple outputs, those outputs can be assigned to multiple variables enclosed by a pair of brackets ([]).
+    e.g.
+        maxValue = max(values);                     Assign the single function output to a variable.
+        [maxValue, maxValueIndex] = max(values);    Assign the multiple function outputs to variables.
+
+- 2D Plotting
+  - To create 2D plots, use the "plot" function.
+      e.g. Plot the sine values against the values from 0 to 2PI.
+          x = 0 : pi / 100 : 2 * pi;
+          y = sin(x);
+          plot(x, y);
+
+  - To add a title to a plot, use the "title" function.
+      e.g.
+          title('Sine Values Plot');
+
+  - To add a label on the X/Y axis, use the "xlabel"/"ylabel" function.
+      e.g.
+          xlabel('Values');
+          ylabel('Sine Values');
+
+- 2D Plotting with Line Specification
+  When plotting, a line specification (line style, marker symbol and color) can be specified by providing a string as the 3rd argument of the "plot" function.
+    e.g.
+        x = 1:2:19;
+        y = 2:2:20;
+
+        plot(x, y, '--');       MC: Plot the lines as dashed lines instead of the default solid lines.
+        plot(x, y, 'r');        MC: Plot using the red color instead of the default blue color.
+        plot(x, y, 's');        MC: Plot marker symbols as squares instead of lines.
+        plot(x, y, '--rs');     MC: Plot dashed lines and marker symbols as squares in red color.
+
+- Line Specification
+  - The line specification includes
+    - the style of the lines,
+    - the symbol of the data points' markers, and
+    - the color used to render the lines and the markers.
+
+  - The line specification is specified by a string containing pre-defined character sequences as follows.
+    Note: All specifiers are case insensitive.
+
+    Line Style Specifiers (Count: 4)
+      Specifier           Description
+      ----------------------------------------------------
+      '-'                 Plot the lines as solid lines (default).
+      '--'                Plot the lines as dashed lines.
+      ':'                 Plot the lines as dotted lines.
+      '-.'                Plot the lines as dash-dot lines.
+
+    Marker Symbol Specifiers (Count: 13)
+      Specifier           Description
+      ----------------------------------------------------
+      '+'                 Plot the marker symbols as the plus signs.
+      'o'                 Plot the marker symbols as the circles.
+      '*'                 Plot the marker symbols as the asterisk.
+      '.'                 Plot the marker symbols as the points.
+      'x'                 Plot the marker symbols as the crosses.
+      's' or 'square'     Plot the marker symbols as the squares.
+      'd' or 'diamond'    Plot the marker symbols as the diamond signs.
+      '^'                 Plot the marker symbols as the upward-pointing triangles.
+      'v'                 Plot the marker symbols as the downward-pointing triangles.
+      '>'                 Plot the marker symbols as the right-pointing triangles.
+      '<'                 Plot the marker symbols as the left-pointing triangles.
+      'p' or 'pentagram'  Plot the marker symbols as the five-pointed stars (pentagram).
+      'h''' or 'hexagram' Plot the marker symbols as the six-pointed stars (hexagram).
+
+      Note: The point ('.') marker symbol does not change the size when the specified value is less than 5.
+
+    Color Specifiers (Count: 8)
+      Specifier           Description
+      ----------------------------------------------------
+      'r'                 Plot using the red color.
+      'g'                 Plot using the green color.
+      'b'                 Plot using the blue color (default).
+      'y'                 Plot using the yellow color.
+      'k'                 Plot using the black color.
+      'w'                 Plot using the white color.
+      'c'                 Plot using the cyan color.
+      'm'                 Plot using the magenta color.
+
+- 3D Plotting
+  - To create 3D plots, use the "meshgrid" and "surf" functions.
+
+    Steps
+    #1. Generate X and Y data points, using the "meshgrid" function.
+    #2. Generate Z data points, using some function with X and Y data points as the arguments.
+    #3. Create the 3D plot, using the "surf" function with X, Y and Z data points as the arguments.
+
+    e.g.
+        [x, y] = meshgrid(-2 : .2 : 2);
+        z = x .* exp(-x .^ 2 - y .^ 2);
+        surf(x, y, z);
+
+    e.g.
+        [a, b] = meshgrid(-3 : .25 : 3);
+        c = exp(-a .^ 2 - b .^ 2);
+        surf(a, b, c);
+
+  - To display multiple plots in different subregions of the same window, use the "subplot" function.
+
+    e.g.
+        t = 0 : pi / 10 : 2 * pi;
+        [X, Y, Z] = cylinder(4 * cos(t));
+        subplot(2, 2, 1); mesh(X); title('X');
+        subplot(2, 2, 2); mesh(Y); title('Y');
+        subplot(2, 2, 3); mesh(Z); title('Z');
+        subplot(2, 2, 4); mesh(X, Y, Z); title('X, Y, Z');
+
+- Adding New Plots to Existing Plots
+  By default, MATLAB clears existing plots when calling a plotting function.
+  To add new plots to existing plots, use the "hold on" command.
+  Then, until using the "hold off" command or closing the plot window, all new plots will be added to existing plots.
+    e.g.
+        x = 0 : pi / 100 : 2 * pi;
+        y = sin(x);
+        plot(x, y);
+
+        hold on;
+
+        y2 = cos(x);
+        plot(x, y2, ':');
+        legend('sin', 'cos');
+
+        hold off;
+
+- Programming and Scripts
+  - The simplest type of MATLAB program is a script.
+    A script is a file with a ".m" extension that contains multiple sequential lines of MATLAB commands and function calls.
+    A script can be run by typing its name at the command line.
+
+  - To create a script, use the "edit" command.
+    e.g.
+        edit plotMeanOfRandomData
+        OR
+        edit 'plotMeanOfRandomData'
+        OR
+        edit('plotMeanOfRandomData')      MC: A script which name is "plotMeanOfRandomData" and file name is "plotMeanOfRandomData.m" is created.
+
+  - To add some comments, use the percent (%) symbol.
+    e.g.
+        % Generate a random data and calculate its mean.
+        % Plot the random data and its mean then.
+
+        n = 50;     % Use 50 data points.
+
+  - To run a script, type the script's name and press the Enter key.
+    e.g.
+        plotMeanOfRandomData
+
+- Loops and Conditional Statements
+  - The "for" and "while" statements are used as the loop statements.
+  - The "if" and "switch" statements are used as the conditional statements.
+
+  e.g.
+    nsamples = 5;
+    npoints = 50;
+
+    for k = 1 : nsamples
+       iterationString = ['Iteration #', int2str(k)];
+       disp(iterationString)
+       currentData = rand(npoints, 1);
+       sampleMean(k) = mean(currentData)
+    end
+
+    overallMean = mean(sampleMean)
+
+    if overallMean < .49
+       disp('The mean is less than expected!')
+    elseif overallMean > .51
+       disp('The mean is greater than expected!')
+    else
+       disp('The mean is within the expected range.')
+    end
+
+  - Script Locations
+    MATLAB looks for scripts and other files in certain places called as the MATLAB search path.
+    If the scripts are not on the MATLAB search path, be sure to add the scripts' locations to the MATLAB search path.
+
+- Help and Documentation
+  There are several ways to access a function's documentation.
+  Approach                  Description
+  ------------------------------------------------------------------------------
+  <In the Command Window>
+  doc targetFunction        Open a separate window containing the target function's documentation.
+  help targetFunction       Display an abbreviated version of the target function's documentation in the Command Window.
+  targetFunction <F1>       Display a pop-up containing the target function's documentation in the Command Window.
+  targetFunction(           Display the syntax portion of the target function's documentation in the Command Window, by pausing after typing the open parenthesis following the function's name.
+
+  <Misc>
+  Clicking the ? Button in the Home/Shortcut Tool Bar
+                            Open a separate window containing the documentation's home page.
+  Inputting the Target Function's Name in the Search Box of the Shortcut Tool Bar
+                            Open a separate window containing the target function's documentation, after clicking the proper suggestion item in the dropdown list from that search box.
+
+- Entering the Commands
+  - To suppress a command's output, end that command with a semicolon (;).
+  - To enter multiple statements on multiple lines, use SHIFT + ENTER instead of Enter for a new line.
+    Note: This action is unnecessary when using a paired keyword statement such as "for ... end".
+  - To enter multiple statements on one line, use commas (,) or semicolons (;) to separate commands.
+    Commands ending with a comma have output, while commands ending with a semicolon have no output.
+  - To recall previous commands, press UP.
+  - To clear current command, press ESC.
+  - To evaluate some statement (even it is a command portion), select it, right click, and select the Evaluate Selection command (or press F9).
+  - To execute some statement (even it is a command portion), select it, press Enter.
+
+- Formatting Output
+  MATLAB displays output in both the Command Window and the Live Editor.
+  And the output display can be formatted in several approaches.
+  Note: Changing the output's format does not change the corresponding value.
+
+  - Formatting Line Spacing
+    - To add blank lines in the output, use the command "format loose". (default)
+    - To suppress excess blank lines in the output, use the command "format compact".
+    OR
+    - Choose the "loose" or "compact" option at HOME (ENVIRONMENT) > Preferences > MATLAB > Command Window > Text Display > Numeric Display.
+
+  - Formatting Floating-Point Numbers
+    To change the display format of the floating-point numbers,
+    - Use the function "format" with proper arguments, such as follows.
+        Assuming the command "x = [4/3 1.2345e-6]" is executed.
+        Arguments               Result                                      Remarks
+        ----------------------------------------------------------------------------------------------------------------
+        short                   x = 1.3333 0.0000                           The default format.
+        short e                 x = 1.3333e+00 1.2345e-06
+        long                    x = 1.333333333333333 0.000001234500000
+        +                       x = ++
+    OR
+    - Choose a proper option at HOME (ENVIRONMENT) > Preferences > MATLAB > Command Window > Text Display > Numeric Format.
+
+  - Wrapping Input/Output to Fit Window Width
+    A line of code or its output can exceed the width of the Command Window, causing the horizontal scroll bar to appear.
+    To break the input/output into multiple lines to fit the current width of the Command Window,
+    check the Wrap Lines option at HOME (ENVIRONMENT) > Preferences > MATLAB > Command Window > Display.
+
+  - Suppressing the Output
+    To suppress the output of a command, end that command with a semicolon (;).
+
+  - Viewing the Output by Page
+    - To view the output by page, use the command "more on".
+      Then, after a command with large output is executed,
+      to advance to the next line, press Enter (actually, any key?);
+      to advance to the next page, press Space Bar;
+      to stop displaying the output, press q.
+
+  - Clearing the Command Window
+    To clear the Command Window,
+    - use the "clc" function,
+    - select the Command Window option at HOME (CODE) > Clear Commands,
+    - use the "home" function (without clearing the scroll buffer).
+
+- Continuing Long Statements on Multiple Lines
+  - To continue long statements on multiple lines, use an ellipsis (...).
+    e.g.
+        <OK>
+        someValue = 1 + 2 + 3 + 4 ...
+                  + 5 + 6 + 7 + 8
+        ->
+        someValue = 36
+
+        <NG>
+        someValue = 1 + 2 + 3 + 4 <SHIFT + ENTER>
+                  + 5 + 6 + 7 + 8
+        ->
+        someValue = 10
+        ans = 26
+
+        <OK>
+        someValue = ['Xxx1 ' 'Xxx2 ' 'Xxx3 ' ...
+                     'Xxx4 ' 'Xxx5']
+        ->
+        someValue = 'Xxx1 Xxx2 Xxx3 Xxx4 Xxx5'
+
+        <NG>
+        someValue = ['Xxx1 ' 'Xxx2 ' 'Xxx3 ' <SHIFT + ENTER>
+                     'Xxx4 ' 'Xxx5']
+        ->
+        <Some Error Occurred>
+
+  - The start and end quotation marks for a character vector must appear on the same line.
+    e.g.
+        <NG>
+        someValue = 'Xxx1 Xxx2 Xxx3 ...
+                     Xxx4 Xxx5'
+        ->
+        <Some Error Occurred>
+
+        <OK>
+        someValue = ['Xxx1 Xxx2 Xxx3 ' ...
+                     'Xxx4 Xxx5']
+        ->
+        someValue = 'Xxx1 Xxx2 Xxx3 Xxx4 Xxx5'
+
+  - An ellipsis outside a quoted text is equivalent to a space.
+    e.g.
+        MC: The variables "a", "b" and "c" have same content.
+        a = [123 456 789]
+        b = [123,456,789]
+        c = [123 ...
+             456 ...
+             789]
+
+- Creating Shortcuts
+  - To create a shortcut,
+    - select HOME (FILE) > New > Command Shortcut or SHORTCUTS (MANAGE) > New Shortcut,
+    - input necessary information in the Shortcut Editor window and save.
+
+  - To edit/delete a shortcut,
+    - select SHORTCUTS (MANAGE) > Organize Shortcuts or
+    - right click the shortcut's button at the Quick Access Toolbar or SHORTCUTS (GENERAL).
+
+  - To run a shortcut,
+    click the shortcut's button at the Quick Access Toolbar or SHORTCUTS (GENERAL).
+
+- Stopping a Command's Execution
+  - To stop a command's execution, press CTRL + C or CTRL + BREAK.
+  - CTRL + C does not always stop execution for files that run a long time, or that call built-ins or MEX-files that run a long time.
+    If so, include a drawnow/pause/getframe function in the file (e.g. within a large loop).
+  - CTRL + C might be less responsive if starting MATLAB with the -nodesktop option.
+
+- Finding Functions
+  - To open a browser to find functions (the Function Browser),
+    - click the Functions button (displayed as fx) left to the command prompt in the Command Window, or in the EDITOR (EDIT) toolbar, or
+    - press SHIFT + F1.
+  - The Function Browser closes when the mouse pointer is moved outside of it.
+    To keep it open, drag it to a different location.
+  - By default, all functions from all installed products are searched.
+    To select a subset of installed products, click the All Installed Products button at the bottom of the Function Browser.
+  - To find functions, input a search term in the search box of the Function Browser.
+    In the search results, a parenthetical term after a function name indicates
+    either that the function is in a product folder other than MATLAB, or that there are multiple functions with the same name.
+    e.g. The "fft (comm)" result indicates the "fft" function is from the Communications System Toolbox folder.
+  - To insert a function into the current window, double click the function.
+    Alternatively, drag the function to any proper position.
+  - To view a function's syntax information, click a function or move the mouse pointer on it for a while,
+    then a pop-up with that function's syntax information displays.
+    To keep the pop-up open, drag it to a different location.
+
+- Finding Text
+  - To find a text in the Command Window using the Find dialog,
+    select the Command Window's title bar > the Down Arrow button > the Find... button.
+    - All texts include the visible texts and those texts in the scroll buffer can be searched.
+    - The "clc" function empties the scroll buffer, thus the cleared text is no longer searchable.
+      To clear the display without emptying the scroll buffer, use the "home" function.
+  - To find a text in the Command Window using an incremental search,
+    press Ctrl + Shift + S for a forward search or Ctrl + Shift + R for a backward search,
+    then input a search term, and optionally perform any of the following actions,
+        Action                                                      Keyboard Shortcut
+        ----------------------------------------------------------------------------------------------------------------
+        Complete a partially highlighted set of characters.         CTRL + W
+        Find the next occurrence of a set of characters.            CTRL + S
+        Back to the last successful search.                         CTRL + G
+    finally end the search by pressing ESC, ENTER, or any other key that is not a character or number.
+
+    Note: When inputting lowercase letters, both corresponding lowercase and uppercase letters are searched;
+          when inputting uppercase letters, only corresponding uppercase letters are searched.
+  - To find a text in the Command History using the Find dialog,
+    select the Command History's title bar > the Down Arrow button > the Find... button.
+
+- Checking Syntax as Typing
+  - Syntax Highlighting
+    Syntax highlighting means some MATLAB elements appear in different colors in the Command Window and the Editor.
+
+    e.g.
+        % Create a file for output.         MC: By default, comments display in green color.
+        !touch testFile.txt                 MC: By default, system commands display in olive color.
+        fid = fopen('testFile.txt', 'w');   MC: By default, strings display in purple color.
+        for i = 1:10                        MC: By default, keywords display in blue color.
+            fprintf(fid, '%6.2f \n, i);     MC: By default, unterminated strings display in maroon color.
+        end
+
+        >> sampleFunction
+        Link to sample: {link}              MC: By default, links display in blue color.
+        Warning: Min value set to 0         MC: By default, warnings display in coral color.
+        > In sampleFunction at 4
+        Error using sampleFunction          MC: By default, errors display in red color.
+        Invalid type
+
+    Note: Except for errors, output in the Command Window does not appear with syntax highlighting.
+
+  - Delimiter Matching
+    MATLAB indicates matched and mismatched delimiters, such as parentheses, brackets, and braces, to help avoiding syntax errors.
+    MATLAB also indicates paired language keywords, such as for, if, while, else, and end statements.
+    By default, MATLAB indicates delimiter matching as follows.
+    - When typing a closing delimiter, MATLAB highlights or underlines the corresponding opening delimiter.
+    - When typing more closing delimiters than opening delimiters, MATLAB puts a strike line through or underlines the unmatched delimiter.
+    - When moving the mouse cursor over one delimiter, MATLAB underlines both delimiters in a pair.
+      If no corresponding delimiter exists, MATLAB puts a strike line through the unmatched delimiter.
+      If a matching delimiter exists but not visible, a pop-up appears showing the line containing the matching delimiter.
+
+  - Tab Completion
+    MATLAB can help avoiding typographical errors by completing the names of MATLAB elements.
+    It is done by typing the first few characters of a name then pressing the TAB key.
+    If there are multiple matches for the rest of the name, a pop-up displays containing those matches.
+    Use the UP and DOWN keys to select a match in the pop-up, and press the TAB or ENTER key to complete the name.
+
+  - Function Syntax Hints
+    ...
+
+- Writing to a Diary File
+  To keep an activity log of a session, use the "diary" function, as follows.
+  1. Turn on the diary function, by executing the command "diary" or "diary {Diary File's Name}".
+     Note: If the diary file's name is not provided, the default name "diary" is used.
+  2. Do anything that should be kept in the diary file.
+  3. Turn off the diary function, by executing the command "diary off".
+
+- Variable Names
+  - Valid Variable Names
+    - A valid variable name starts with a letter, followed by letters, digits, or underscores.
+    - MATLAB is case sensitive, so "a" and "A" are different variables.
+    - The maximum length of a variable name is the value that the "namelengthmax" command returns (an example value in Windows 7 is 63).
+    - A variable name cannot be same as one of MATLAB keywords (e.g. 'if', 'end').
+      The "iskeyword" function helps to determine whether a name is a keyword.
+        e.g.
+            iskeyword('abc')            -> 0 (The name "abc" is not a keyword name)
+            iskeyword('end')            -> 1 (The name "end" is a keyword name)
+
+  - Conflicts with Function Names
+    - Avoid creating variables with the same name as a function (e.g. 'i', 'j', 'mode', 'char', 'size', and 'path').
+    - In general, variable names take precedence over function names. But, if creating a variable that uses the name of a function, sometimes unexpected results occur.
+    - To check whether a name is already in use, use the "exist" or "which" function.
+        e.g.
+            exist('doSomething')        -> 0 (There is no MATLAB element named "doSomething")
+            exist('sin')                -> 1 (At least one MATLAB element named "sin" exists)
+            which('setup')              -> 'setup' not found. (There is no MATLAB function/file named "setup")
+            which('clean')              -> C:\Users\rchen\Documents\MATLAB\clean.m (At least one MATLAB function/file named "setup" exists)
+
+- Case and Space Sensitivity
+  - MATLAB code is sensitive to casing, and insensitive to spaces except when defining arrays.
+    It is a best practice to use lowercase only when naming functions. MC: By far, do not agree.
+  - Spaces around operators are optional, but do improve readability.
+
+- Command Syntax vs. Function Syntax
+  - MATLAB supports 2 types of syntax - Command Syntax and Function Syntax, to execute statements, as follows.
+      Command Syntax    : someFunction someArgument1 someArgument2
+      Function Syntax   : someFunction(someArgument1, someArgument2)
+
+    e.g.
+        disp 'abc'
+        disp abc
+        disp('abc')
+        disp(['abc'])
+
+  - Pros and Cons
+    Syntax                  Pros                            Cons
+    ------------------------------------------------------------------------------------------------
+    Command Syntax          - Simpler                       - No output
+                                                            - All inputs must be character vectors.
+                                                            - Easy to cause confusion and bugs.
+    Function Syntax         - General-purpose               - More typing
+                            - Can have output
+                            - Inputs can be any valid types.
+
+
+========================================
+Function List
+========================================
+Function        Brief
+--------------------------------------------------------------------------------
+ver             Display information for MathWorks products.
+
+                e.g.
+                    ver
+
+openExample     Open an example.
+                An argument should be provided to specify the example's location under the "examples" folder of the MATLAB installation.
+
+                Syntax
+                    openExample(exampleLocation)
+
+                Example
+                    openExample('matlab/LinePlotsGSExample')    MC: An example named "LinePlotsGSExample" will be searched at the location
+                                                                    "{MATLAB Installation}/examples/matlab" and then be opened.
+
+
+========================================
+Code Snippets
+========================================
+============================================================
+
+============================================================
+
+========================================
+Toolbox - Psychtoolbox
+========================================
+Psychtoolbox for MATLAB - Wikipedia
+https://en.wikipedia.org/wiki/Psychtoolbox_for_MATLAB
+
+Psychtoolbox
+http://psychtoolbox.org/
+
+Overview
+Information for Beginners
+Misc
+    Updating Psychtoolbox
+
+============================================================
+Overview
+============================================================
+- Psychtoolbox is a set of MATLAB and GNU Octave functions for vision research.
+- Psychtoolbox interfaces between MATLAB/Octave and the computer hardware.
+- Psychtoolbox is free.
+- By far (2017/02), Psychophysics Toolbox Version 3 (PTB-3) is the latest version of Psychtoolbox, while Psychophysics Toolbox Version 2 (PTB-2) becomes deprecated.
+- PTB is an abbreviation of PsychToolBox.
+- PTB-3 is based on PTB-2, with its Matlab C extensions rewritten to be more modular and to use OpenGL on the back end.
+- It is strongly recommended to run Psychtoolbox on a GNU Linux machine,
+  because running Psychtoolbox on other machines (such as Apple Mac OS X and Microsoft Windows)
+  causes much less support from the developers, and may have restrictions in functionality, reliability, performance and precision for some features.
+- System requirements of PTB-3 are listed at the following location.
+  http://psychtoolbox.org/requirements/
+
+- To use Psychtoolbox, there are 3 things to learn, as follows.
+  - MATLAB
+  - How to create stimuli and measure responses
+  - How to organize an experiment
+  Note: For details, see PsychDemos or type "help PsychDemos" in MATLAB after Psychtoolbox's installation.
+- By default, Psychtoolbox provides beta branches, which contain the latest features, performance enhancements and bug fixes.
+- Executing the command "PsychtoolboxVersion" returns Psychtoolbox's version information (version number, flavor and revision number).
+
+============================================================
+Information for Beginners
+============================================================
+- Try the command "help Psychtoolbox".  (to list all the categories of functions in Psychtoolbox)
+- Try the command "help PsychDemos".    (to list all the demos in Psychtoolbox)
+- Be sure to read the document "{Psychtoolbox Home}/Psychtoolbox/PsychDocumentation/Psychtoolbox3-Slides.pdf"
+  for an overview of differences between PTB-3 and PTB-2, and proper use of basic features.
+- Be sure to read other documents in the folder "{Psychtoolbox Home}/Psychtoolbox/PsychDocumentation".
+- Be sure to get familiar with demos in the folder "{Psychtoolbox Home}/PsychDemos".
+  Those demos show best practices for many common tasks and are generally well documented.
+
+============================================================
+Misc
+============================================================
+Updating Psychtoolbox
+
+Updating Psychtoolbox
+    To update Psychtoolbox to the latest version, use the following MATLAB command.
+        UpdatePsychtoolbox
+
+========================================
+References
+========================================
+MATLAB - MathWorks
+http://mathworks.com/products/matlab
+
+MATLAB - Wikipedia
+https://en.wikipedia.org/wiki/MATLAB
+
+MATLAB Documentation - MathWorks
+https://www.mathworks.com/help/matlab
+
+MATLAB Academy - MathWorks
+https://matlabacademy.mathworks.com/
+
+MATLAB Programming - Wikibooks
+https://en.wikibooks.org/wiki/MATLAB_Programming
+
+MATLAB - Tutorials Point
+http://www.tutorialspoint.com/matlab/
+
+MATLAB Installation Information (Sample)
+--------------------------------------------------------------------------------
+Installation Folder : C:\Program Files\MATLAB\R2016b
+Download Size       : 3,592 MB
+Installation Size   : 10,463 MB
+Products            :
+- MATLAB 9.1
+- Simulink 8.8
+- Bioinformatics Toolbox 4.7
+- Communications System Toolbox 6.3
+- Computer Vision System Toolbox 7.2
+- Control System Toolbox 10.1
+- Curve Fitting Toolbox 3.5.4
+- Data Acquisition Toolbox 3.10
+- Database Toolbox 7.0
+- Datafeed Toolbox 5.4
+- DSP System Toolbox 9.3
+- Econometrics Toolbox 3.5
+- Financial Instruments Toolbox 2.4
+- Financial Toolbox 5.8
+- Global Optimization Toolbox 3.4.1
+- Image Acquisition Toolbox 5.1
+- Image Processing Toolbox 9.5
+- Instrument Control Toolbox 3.10
+- Neural Network Toolbox 9.1
+- Optimization Toolbox 7.5
+- Parallel Computing Toolbox 6.9
+- Signal Processing Toolbox 7.3
+- SimBiology 5.5
+- Simulink Control Design 4.4
+- Spreadsheet Link 3.3
+- Stateflow 8.8
+- Statistics and Machine Learning Toolbox 11.0
+- Symbolic Math Toolbox 7.1
+- System Identification Toolbox 9.5
+--------------------------------------------------------------------------------
+
+Psychtoolbox
+http://psychtoolbox.org/
+
+Psychtoolbox - Wikipedia
+https://en.wikipedia.org/wiki/Psychtoolbox_for_MATLAB
+
+Psychtoolbox Documentation
+http://docs.psychtoolbox.org/Psychtoolbox
+
+Psychtoolbox Tutorial
+http://peterscarfe.com/ptbtutorials.html
