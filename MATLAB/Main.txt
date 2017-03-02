@@ -25,13 +25,14 @@ Study Notes (at MathWorks)
     Accepting Function Outputs
     2D Plotting
     2D Plotting with Line Specification
-    Line Specification
     3D Plotting
     Adding New Plots to Existing Plots
     Programming and Scripts
     Loops and Conditional Statements
     Help and Documentation
     --------------------------------------------------------
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    Line Specification
     --------------------------------------------------------
 Function List
 Code Snippets
@@ -153,12 +154,12 @@ Calling Functions
 Accepting Function Outputs
 2D Plotting
 2D Plotting with Line Specification
-Line Specification
 3D Plotting
 Adding New Plots to Existing Plots
 Programming and Scripts
 Loops and Conditional Statements
 Help and Documentation
+--------------------------------------------------------------------------------
 Entering the Commands
 Formatting Output
 Continuing Long Statements on Multiple Lines
@@ -171,6 +172,9 @@ Writing to a Diary File
 Variable Names
 Case and Space Sensitivity
 Command Syntax vs. Function Syntax
+--------------------------------------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Line Specification
 
 - MATLAB Panels
   MATLAB contains the following panels.
@@ -448,54 +452,6 @@ Command Syntax vs. Function Syntax
         plot(x, y, 's');        MC: Plot marker symbols as squares instead of lines.
         plot(x, y, '--rs');     MC: Plot dashed lines and marker symbols as squares in red color.
 
-- Line Specification
-  - The line specification includes
-    - the style of the lines,
-    - the symbol of the data points' markers, and
-    - the color used to render the lines and the markers.
-
-  - The line specification is specified by a string containing pre-defined character sequences as follows.
-    Note: All specifiers are case insensitive.
-
-    Line Style Specifiers (Count: 4)
-      Specifier           Description
-      ----------------------------------------------------
-      '-'                 Plot the lines as solid lines (default).
-      '--'                Plot the lines as dashed lines.
-      ':'                 Plot the lines as dotted lines.
-      '-.'                Plot the lines as dash-dot lines.
-
-    Marker Symbol Specifiers (Count: 13)
-      Specifier           Description
-      ----------------------------------------------------
-      '+'                 Plot the marker symbols as the plus signs.
-      'o'                 Plot the marker symbols as the circles.
-      '*'                 Plot the marker symbols as the asterisk.
-      '.'                 Plot the marker symbols as the points.
-      'x'                 Plot the marker symbols as the crosses.
-      's' or 'square'     Plot the marker symbols as the squares.
-      'd' or 'diamond'    Plot the marker symbols as the diamond signs.
-      '^'                 Plot the marker symbols as the upward-pointing triangles.
-      'v'                 Plot the marker symbols as the downward-pointing triangles.
-      '>'                 Plot the marker symbols as the right-pointing triangles.
-      '<'                 Plot the marker symbols as the left-pointing triangles.
-      'p' or 'pentagram'  Plot the marker symbols as the five-pointed stars (pentagram).
-      'h''' or 'hexagram' Plot the marker symbols as the six-pointed stars (hexagram).
-
-      Note: The point ('.') marker symbol does not change the size when the specified value is less than 5.
-
-    Color Specifiers (Count: 8)
-      Specifier           Description
-      ----------------------------------------------------
-      'r'                 Plot using the red color.
-      'g'                 Plot using the green color.
-      'b'                 Plot using the blue color (default).
-      'y'                 Plot using the yellow color.
-      'k'                 Plot using the black color.
-      'w'                 Plot using the white color.
-      'c'                 Plot using the cyan color.
-      'm'                 Plot using the magenta color.
-
 - 3D Plotting
   - To create 3D plots, use the "meshgrid" and "surf" functions.
 
@@ -609,6 +565,8 @@ Command Syntax vs. Function Syntax
                             Open a separate window containing the documentation's home page.
   Inputting the Target Function's Name in the Search Box of the Shortcut Tool Bar
                             Open a separate window containing the target function's documentation, after clicking the proper suggestion item in the dropdown list from that search box.
+
+--------------------------------------------------------------------------------
 
 - Entering the Commands
   - To suppress a command's output, end that command with a semicolon (;).
@@ -868,12 +826,1086 @@ Command Syntax vs. Function Syntax
                             - Can have output
                             - Inputs can be any valid types.
 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+- Line Specification
+  - The line specification includes
+    - the style of the lines,
+    - the symbol of the data points' markers, and
+    - the color used to render the lines and the markers.
+
+  - The line specification is specified by a string containing pre-defined character sequences as follows.
+    Note: All specifiers are case insensitive.
+
+    Line Style Specifiers (Count: 4)
+      Specifier           Description
+      ----------------------------------------------------
+      '-'                 Plot the lines as solid lines (default).
+      '--'                Plot the lines as dashed lines.
+      ':'                 Plot the lines as dotted lines.
+      '-.'                Plot the lines as dash-dot lines.
+
+    Marker Symbol Specifiers (Count: 13)
+      Specifier           Description
+      ----------------------------------------------------
+      '+'                 Plot the marker symbols as the plus signs.
+      'o'                 Plot the marker symbols as the circles.
+      '*'                 Plot the marker symbols as the asterisk.
+      '.'                 Plot the marker symbols as the points.
+      'x'                 Plot the marker symbols as the crosses.
+      's' or 'square'     Plot the marker symbols as the squares.
+      'd' or 'diamond'    Plot the marker symbols as the diamond signs.
+      '^'                 Plot the marker symbols as the upward-pointing triangles.
+      'v'                 Plot the marker symbols as the downward-pointing triangles.
+      '>'                 Plot the marker symbols as the right-pointing triangles.
+      '<'                 Plot the marker symbols as the left-pointing triangles.
+      'p' or 'pentagram'  Plot the marker symbols as the five-pointed stars (pentagram).
+      'h''' or 'hexagram' Plot the marker symbols as the six-pointed stars (hexagram).
+
+      Note: The point ('.') marker symbol does not change the size when the specified value is less than 5.
+
+    Color Specifiers (Count: 8)
+      Specifier           Description
+      ----------------------------------------------------
+      'r'                 Plot using the red color.
+      'g'                 Plot using the green color.
+      'b'                 Plot using the blue color (default).
+      'y'                 Plot using the yellow color.
+      'k'                 Plot using the black color.
+      'w'                 Plot using the white color.
+      'c'                 Plot using the cyan color.
+      'm'                 Plot using the magenta color.
 
 ========================================
 Function List
 ========================================
+Matrices and Arrays
+    Create and Combine Arrays
+    Create Grids
+    Determine Size and Shape
+    Reshape and Rearrange
+    Control Indexing
+================================================================================
+Matrices and Arrays - Create and Combine Arrays
+================================================================================
+zeros / ones / rand / magic / eye / repelem / repmat / cat / true / false
+diag / blkdiag / horzcat / vertcat
 Function        Brief
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+zeros           Create an array which elements are all zeros.
+
+                e.g.
+                    zeros(3)
+                        0   0   0
+                        0   0   0
+                        0   0   0
+
+                    zeros(3, 4)
+                        0   0   0   0
+                        0   0   0   0
+                        0   0   0   0
+
+                    zeros
+                        0
+
+ones            Create an array which elements are all ones.
+
+                e.g.
+                    ones(3)
+                        1   1   1
+                        1   1   1
+                        1   1   1
+
+                    ones(3, 4)
+                        1   1   1   1
+                        1   1   1   1
+                        1   1   1   1
+
+                    ones
+                        1
+
+rand            Create an array which elements are all uniformly distributed random numbers.
+
+                e.g.
+                    rand(3)
+                        0.8147  0.9134  0.2785
+                        0.9058  0.6324  0.5469
+                        0.1270  0.0975  0.9575
+
+                    rand(3, 4)
+                        0.9649  0.9572  0.1419  0.7922
+                        0.1576  0.4854  0.4218  0.9595
+                        0.9706  0.8003  0.9157  0.6557
+
+                    rand
+                        0.0357
+
+magic           Create a magic square matrix.
+                The matrix is constructed from the integers 1 through n^2 with equal row/column/diagonal sums.
+
+                e.g.
+                    magic(3)
+                        8   1   6
+                        3   5   7
+                        4   9   2
+
+                    magic(4)
+                       16    2   3  13
+                        5   11  10   8
+                        9    7   6  12
+                        4   14  15   1
+
+eye             Create an identity matrix.
+                Note: Actually, this function creates not only identity matrices.
+                      The consistent behavior of this function is to set its elements ones on its main diagonal and zeros elsewhere.
+
+                e.g.
+                    eye(3)
+                        1   0   0
+                        0   1   0
+                        0   0   1
+
+                    eye(3, 4)
+                        1   0   0   0
+                        0   1   0   0
+                        0   0   1   0
+
+                    eye
+                        1
+
+repelem         Repeat copies of array elements to create an new array.
+
+                e.g.
+                    someArray = [1 2 3 4]
+
+                    repelem(someArray, 3)
+                        1   1   1   2   2   2   3   3   3   4   4   4
+
+                    repelem(someArray, [4, 2, 1, 5])
+                        1   1   1   1   2   2   3   4   4   4   4   4
+
+repmat          Repeat copies of array to create an new array.
+
+                e.g.
+                    someArray = diag([100 200 300])
+                        100     0     0
+                          0   200     0
+                          0     0   300
+
+                    repmat(someArray, 2)
+                        100     0     0   100     0     0
+                          0   200     0     0   200     0
+                          0     0   300     0     0   300
+                        100     0     0   100     0     0
+                          0   200     0     0   200     0
+                          0     0   300     0     0   300
+
+                    repmat(someArray, 2, 3)
+                        100     0     0   100     0     0   100     0     0
+                          0   200     0     0   200     0     0   200     0
+                          0     0   300     0     0   300     0     0   300
+                        100     0     0   100     0     0   100     0     0
+                          0   200     0     0   200     0     0   200     0
+                          0     0   300     0     0   300     0     0   300
+
+cat             Concatenate arrays along the specified dimension and return the result.
+
+                e.g.
+                    a               b
+                        1   2           5     6
+                        3   4           7     8
+
+                    cat(1, a, b)
+                        1   2
+                        3   4
+                        5   6
+                        7   8
+
+                    cat(2, a, b)
+                        1   2   5   6
+                        3   4   7   8
+
+                    cat(3, a, b)
+                        ans(:,:,1) =
+                            1   2
+                            3   4
+
+                        ans(:,:,2) =
+                            5   6
+                            7   8
+
+true            Return the logical 1 (true).
+
+                e.g.
+                    true
+                        (logical) 1
+
+false           Return the logical 0 (false).
+
+                e.g.
+                    false
+                        (logical) 0
+
+--------------------
+
+diag            Create diagonal matrix or get diagonal elements of matrix
+blkdiag         Construct block diagonal matrix from input arguments
+horzcat         Concatenate arrays horizontally
+vertcat         Concatenate arrays vertically
+
+================================================================================
+Matrices and Arrays - Create Grids
+================================================================================
+linspace / logspace / meshgrid
+freqspace / ndgrid
+Function        Brief
+------------------------------------------------------------------------------------------------------------------------
+linspace        Create a linearly spaced vector.
+                This function is similar to the colon (:) operator, but gives direct control over the number of points and always includes the end point.
+                This function generates linearly spaced values, and it has a sibling function "logspace", which generates logarithmically spaced values.
+
+                e.g.
+                    % Create a row vector of 100 evenly spaced points between 1 and 5.
+                    linspace(1, 5)
+                        1.0000  1.0404  1.0808 ... 4.9192  4.9596  5.0000
+
+                    % Create a row vector of 8 evenly spaced points between 1 and 5.
+                    linspace(1, 5, 8)
+                        1.0000  1.5714  2.1429  2.7143  3.2857  3.8571  4.4286  5.0000
+
+logspace        Create a logarithmically spaced vector.
+                This function is especially useful for creating frequency vectors.
+                This function is the logarithmic equivalent of the "linspace" function and the colon (:) operator.
+
+                e.g.
+                    % Create a row vector of 50 logarithmically spaced points between decades 10^1 and 10^5.
+                    logspace(1, 5)
+                        (1.0e+05 *)
+                        0.0001  0.0001  0.0001  0.0002  0.0002  0.0003 ... 0.5690  0.6866  0.8286  1.0000
+
+                    % Create a row vector of 8 logarithmically spaced points between decades 10^1 and 10^5.
+                    logspace(1, 5, 8)
+                        (1.0e+05 *)
+                        0.0001  0.0004  0.0014  0.0052  0.0193  0.0720  0.2683  1.0000
+
+meshgrid        Generate 2D/3D grids.
+
+                e.g.
+                    x = 1 : 3
+                        1   2   3
+
+                    y = 1 : 5
+                        1   2   3   4   5
+
+                    % Generate 2D grids coordinates per the coordinates contained in vectors "x" and "y".
+                    % "xGrid" is a matrix where each row is a copy of the vector "x", and
+                    % "yGrid" is a matrix where each column is a copy of the vector "y".
+                    % The grid represented by the coordinates "xGrid" and "yGrid" has length("y") rows and length("x") columns.
+                    [xGrid, yGrid] = meshgrid(x, y)
+                        xGrid =
+                             1     2     3
+                             1     2     3
+                             1     2     3
+                             1     2     3
+                             1     2     3
+
+                        yGrid =
+                             1     1     1
+                             2     2     2
+                             3     3     3
+                             4     4     4
+                             5     5     5
+
+
+                e.g.
+                    x = 0 : 2 : 6
+                        0   2   4   6
+
+                    y = 0 : 1 : 6
+                        0   1   2   3   4   5   6
+
+
+                    z = 0 : 3 : 6
+                        0   3   6
+
+                    [xGrid, yGrid, zGrid] = meshgrid(x, y, z)
+                        ...
+
+--------------------
+
+freqspace       Frequency spacing for frequency response
+ndgrid          Rectangular grid in N-D space
+
+================================================================================
+Matrices and Arrays - Determine Size and Shape
+================================================================================
+size / length / ndims / numel / isempty / isscalar / ismatrix / isvector / isrow / iscolumn
+Function        Brief
+------------------------------------------------------------------------------------------------------------------------
+size            Returns an array which each element is the length of the corresponding dimension of the specified array.
+
+                e.g.
+                    size(rand(1, 3))
+                        1   3
+
+                    size(rand(4, 3))
+                        4   3
+
+                    size(rand(4, 3, 5))
+                        4   3   5
+
+                    [xLength, yLength] = size(rand(4, 3))
+                        xLength = 4
+                        yLength = 3
+
+                    size(rand(4, 3, 5), 2)
+                        3
+
+length          Return the length of the largest array dimension.
+                For vectors, the length is the number of elements; and for arrays, the length is max(size(x)).
+                The length of an empty array is zero.
+
+                e.g.
+                    length(rand(1, 3))
+                        3
+
+                    length(rand(4, 3))
+                        4
+
+                    length(rand(4, 3, 5))
+                        5
+
+                    length([])
+                        0
+
+ndims           Return the number of array dimensions.
+                The number of array dimensions is always greater than or equal to 2.
+
+                e.g.
+                    ndims(rand(1, 3))
+                        2
+
+                    ndims(rand(3, 1))
+                        2
+
+                    ndims(rand(4, 3))
+                        2
+
+                    ndims(rand(4, 3, 5))
+                        3
+
+numel           Return the number of array elements.
+
+                e.g.
+                    numel(rand(3))
+                        9
+
+                    numel(rand(4, 3))
+                        12
+
+                    numel(rand(1, 3))
+                        3
+
+                    numel(rand(3, 1))
+                        3
+
+                    numel(rand(4, 3, 5))
+                        60
+
+isempty         Return whether the input is empty.
+
+                e.g.
+                    isempty(0)
+                        (logical) 0
+
+                    isempty(1)
+                        (logical) 0
+
+                    isempty(rand(3, 4))
+                        (logical) 0
+
+                    data = rand(2, 3, 4);
+
+                    isempty(data)
+                        (logical) 0
+
+                    data(:, :, :) = [];
+
+                    isempty(data)
+                        (logical) 1
+
+                    isempty([])
+                        (logical) 1
+
+isscalar        Return whether the input is scalar.
+
+                e.g.
+                    data = rand(3, 4);
+
+                    isscalar(data)
+                        (logical) 0
+
+                    isscalar(data(2, 3))
+                        (logical) 1
+
+ismatrix        Return whether the input is matrix.
+
+                e.g.
+                    ismatrix(123)
+                        (logical) 1
+
+                    ismatrix('abc')
+                        (logical) 1
+
+                    ismatrix(1:3)
+                        (logical) 1
+
+                    ismatrix((1:3)')
+                        (logical) 1
+
+                    ismatrix(rand(3, 4))
+                        (logical) 1
+
+                    ismatrix(true)
+                        (logical) 1
+
+isvector        Return whether the input is vector.
+
+                e.g.
+                    data = rand(3, 4);
+
+                    isvector(data)
+                        (logical) 0
+
+                    isvector(data(2, :))
+                        (logical) 1
+
+                    isvector(data(:, 3))
+                        (logical) 1
+
+isrow           Return whether the input is row vector.
+
+                e.g.
+                    data = rand(3, 4);
+
+                    isrow(data)
+                        (logical) 0
+
+                    isrow(data(2, :))
+                        (logical) 1
+
+                    isrow(data(:, 3))
+                        (logical) 0
+
+iscolumn        Return whether the input is column vector.
+
+                e.g.
+                    data = rand(3, 4);
+
+                    iscolumn(data)
+                        (logical) 0
+
+                    iscolumn(data(2, :))
+                        (logical) 0
+
+                    iscolumn(data(:, 3))
+                        (logical) 1
+
+================================================================================
+Matrices and Arrays - Reshape and Rearrange
+================================================================================
+sort / sortrows / issorted / flip / fliplr / flipud / rot90 / transpose / ctranspose / permute / ipermute / circshift / shiftdim / reshape / squeeze
+Function        Brief
+------------------------------------------------------------------------------------------------------------------------
+sort            Sort the array elements and return the result.
+
+                e.g.
+                    sort(5:-1:1)
+                        1   2   3   4   5
+
+                    sort((5:-1:1)')
+                        1
+                        2
+                        3
+                        4
+                        5
+
+                    data = [3 6 9; 2 5 8; 1 4 7]
+                        3   6   9
+                        2   5   8
+                        1   4   7
+
+                    sort(data)
+                        1   4   7
+                        2   5   8
+                        3   6   9
+
+                    data = rand(4, 3, 2)
+                        data(:, :, 1) =
+                            0.3502  0.8329  0.5407
+                            0.6620  0.2564  0.8699
+                            0.4162  0.6135  0.2648
+                            0.8419  0.5822  0.3181
+
+                        data(:, :, 2) =
+                            0.1192  0.6393  0.7210
+                            0.9398  0.5447  0.5225
+                            0.6456  0.6473  0.9937
+                            0.4795  0.5439  0.2187
+
+                    sort(data)
+                        ans(:, :, 1) =
+                            0.3502  0.2564  0.2648
+                            0.4162  0.5822  0.3181
+                            0.6620  0.6135  0.5407
+                            0.8419  0.8329  0.8699
+
+                        ans(:, :, 2) =
+                            0.1192  0.5439  0.2187
+                            0.4795  0.5447  0.5225
+                            0.6456  0.6393  0.7210
+                            0.9398  0.6473  0.9937
+
+                    sort(['c' 'b' 'a'])
+                        'abc'
+
+                    sort(['c' 'b' 'a']')
+                        'a'
+                        'b'
+                        'a'
+
+                    data = [9 6 3; 8 5 2; 7 4 1]
+                        9   6   3
+                        8   5   2
+                        7   4   1
+
+                    sort(data)
+                        7   4   1
+                        8   5   2
+                        9   6   3
+
+                    sort(data, 1)
+                        7   4   1
+                        8   5   2
+                        9   6   3
+
+                    sort(data, 2)
+                        3   6   9
+                        2   5   8
+                        1   4   7
+
+                    sort(1:5, 'descend')
+                        5   4   3   2   1
+
+sortrows        Sort rows of an array/table/timetable and return the result.
+
+                e.g.
+                    data = [3   3   2   5; 3   1   7   4; 2   6   5   8; 3   1   7   2; 9   4   1   3; 6   7   2   9]
+                        3   3   2   5
+                        3   1   7   4
+                        2   6   5   8
+                        3   1   7   2
+                        9   4   1   3
+                        6   7   2   9
+
+                    sortrows(data)
+                        2   6   5   8
+                        3   1   7   2
+                        3   1   7   4
+                        3   3   2   5
+                        6   7   2   9
+                        9   4   1   3
+
+issorted        Return whether the array is sorted.
+
+                e.g.
+                    issorted(1:5)
+                        (logical) 1
+
+                    issorted(5:-1:1)
+                        (logical) 0
+
+flip            Flip the array and return the result.
+
+                e.g.
+                    flip([3 1 4])
+                        4   1   3
+
+                    flip([3 1 4]')
+                        4
+                        1
+                        3
+
+                    data = [1 2 3; 4 5 6; 7 8 9]
+                        1   2   3
+                        4   5   6
+                        7   8   9
+
+                    flip(data)
+                    flip(data, 1)
+                        7   8   9
+                        4   5   6
+                        1   2   3
+
+                    flip(data, 2)
+                        3   2   1
+                        6   5   4
+                        9   8   7
+
+fliplr          Flip the array in the left-right direction and return the result.
+
+                e.g.
+                    fliplr([3 1 4])
+                        4   1   3
+
+                    fliplr([3 1 4]')
+                        3
+                        1
+                        4
+
+                    data = [1 2 3; 4 5 6; 7 8 9]
+                        1   2   3
+                        4   5   6
+                        7   8   9
+
+                    fliplr(data)
+                        3   2   1
+                        6   5   4
+                        9   8   7
+
+flipud          Flip the array in the up-down direction and return the result.
+
+                e.g.
+                    flipud([3 1 4])
+                        3   1   4
+
+                    flipud([3 1 4]')
+                        4
+                        1
+                        3
+
+                    data = [1 2 3; 4 5 6; 7 8 9]
+                        1   2   3
+                        4   5   6
+                        7   8   9
+
+                    flipud(data)
+                        7   8   9
+                        4   5   6
+                        1   2   3
+
+rot90           Rotate the array 90 degrees and return the result.
+                Note: The rotatation is performed counterclockwise.
+
+                e.g.
+                    rot90([3 1 4])
+                        4
+                        1
+                        3
+
+                    rot90([3 1 4]')
+                        3   1   4
+
+                    data = [1 2 3; 4 5 6; 7 8 9]
+                        1   2   3
+                        4   5   6
+                        7   8   9
+
+                    rot90(data)
+                        3   6   9
+                        2   5   8
+                        1   4   7
+
+                    rot90([3 1 4], 2)
+                        4   1   3
+
+                    rot90(data, 2)
+                        9   8   7
+                        6   5   4
+                        3   2   1
+
+transpose       Transpose the vector/matrix and return the result.
+                Simply speaking, this function interchanges the row index and column index for each array element.
+                Note: This function is an alternative to the transpose operater (.').
+
+                e.g.
+                    transpose([3 1 4])
+                        3
+                        1
+                        4
+
+                    transpose([3 1 4]')
+                        3   1   4
+
+                    data = [1 2 3; 4 5 6; 7 8 9]
+                        1   2   3
+                        4   5   6
+                        7   8   9
+
+                    transpose(data)
+                        1   4   7
+                        2   5   8
+                        3   6   9
+
+                    data.'
+                        1   4   7
+                        2   5   8
+                        3   6   9
+
+ctranspose      Perform a complex conjugate transpose on the vector/matrix and return the result.
+                Simply speaking, this function interchanges the row index and column index for each array element.
+                Note: This function is an alternative to the transpose operater (').
+
+                e.g.
+                    ctranspose([3 1 4])
+                        3
+                        1
+                        4
+
+                    ctranspose([3 1 4]')
+                        3   1   4
+
+                    data = [1 2 3; 4 5 6; 7 8 9]
+                        1   2   3
+                        4   5   6
+                        7   8   9
+
+                    ctranspose(data)
+                        1   4   7
+                        2   5   8
+                        3   6   9
+
+                    data'
+                        1   4   7
+                        2   5   8
+                        3   6   9
+
+permute         Rearrange the array dimensions and return the result.
+                Note: All the elements of the order array (this function's 2nd argument) must be unique, real, positive and integer values.
+
+                e.g.
+                    data = [1 2; 3 4]
+                        1   2
+                        3   4
+
+                    % Rearrange the array dimensions by changing the dimension order from 1 2 to 2 1.
+                    permute(data, [2 1])
+                        1   3
+                        2   4
+
+                e.g.
+                    data1 = rand(2, 3, 4);
+                    size(data1)
+                        2   3   4
+
+                    % Rearrange the array dimensions by changing the dimension order from 1 2 3 to 2 3 1.
+                    data2 = permute(data1, [2 3 1]);
+                    size(data2)
+                        3   4   2
+
+ipermute        Return the inverse array which dimensions have been rearranged.
+
+                e.g.
+                    data = [1 2; 3 4]
+                        1   2
+                        3   4
+
+                    % Return the inverse array which dimensions have been rearranged from 1 2 to 2 1.
+                    ipermute(data, [2 1])
+                        1   3
+                        2   4
+
+                e.g.
+                    data1 = rand(2, 3, 4);
+                    size(data1)
+                        2   3   4
+
+                    % Return the inverse array which dimensions have been rearranged from 1 2 3 to 2 3 1.
+                    data2 = ipermute(data1, [2 3 1]);
+                    size(data2)
+                        4   2   3
+
+circshift       Shift the array circularly and return the result.
+
+                e.g.
+                    data = 1:5
+                        1   2   3   4   5
+
+                    circshift(data, 2)
+                        4   5   1   2   3
+
+                e.g.
+                    data = (1:5)'
+                        1
+                        2
+                        3
+                        4
+                        5
+
+                    circshift(data, 2)
+                        4
+                        5
+                        1
+                        2
+                        3
+
+                e.g.
+                    data = [1 2 3; 4 5 6; 7 8 9]
+                        1   2   3
+                        4   5   6
+                        7   8   9
+
+                    circshift(data, [2])
+                        4   5   6
+                        7   8   9
+                        1   2   3
+
+                    circshift(data, [2, 1])
+                        6   4   5
+                        9   7   8
+                        3   1   2
+
+shiftdim        Shift the array dimensions and return the result.
+
+                e.g.
+                    data1 = rand(2, 3, 4);
+                    size(data1)
+                        2   3   4
+
+                    data2 = shiftdim(data1, 2);
+                    size(data2)
+                        4   2   3
+
+reshape         Reshape the array and return the result.
+
+                e.g.
+                    data = 1:10
+                        1   2   3   4   5   6   7   8   9   10
+
+                    % Reshape the array from a 1x10 row vector to a 5x2 matrix.
+                    reshape(data, [5 2])
+                        1   6
+                        2   7
+                        3   8
+                        4   9
+                        5  10
+
+                e.g.
+                    data = zeros(4, 3, 2)
+                        data(:, :, 1) =
+                            0   0   0
+                            0   0   0
+                            0   0   0
+                            0   0   0
+
+                        data(:, :, 2) =
+                            0   0   0
+                            0   0   0
+                            0   0   0
+                            0   0   0
+
+                    reshape(data, 6, 4)
+                        0   0   0   0
+                        0   0   0   0
+                        0   0   0   0
+                        0   0   0   0
+                        0   0   0   0
+                        0   0   0   0
+
+
+squeeze         Remove all singleton array dimensions and return the result.
+                The scalars, vectors and 2D arrays are not affected by this function.
+
+                e.g.
+                    data = rand(1, 3, 2)
+                        data(:, :, 1) =
+                            0.4843  0.8449  0.2094
+
+                        data(:, :, 2) =
+                            0.5523  0.6299  0.0320
+
+                    squeeze(data)
+                            0.4843  0.5523
+                            0.8449  0.6299
+                            0.2094  0.0320
+
+                e.g.
+                    data = rand(3, 1, 2)
+                        data(:, :, 1) =
+                            0.6147
+                            0.3624
+                            0.0495
+
+                        data(:, :, 2) =
+                            0.4896
+                            0.1925
+                            0.1231
+
+                    squeeze(data)
+                            0.6147  0.4896
+                            0.3624  0.1925
+                            0.0495  0.1231
+
+                e.g.
+                    squeeze(1)
+                        1
+
+                    squeeze(1:3)
+                        1   2   3
+
+                    squeeze((1:3)')
+                        1
+                        2
+                        3
+
+                    squeeze([1 2 3; 4 5 6; 7 8 9])
+                        1   2   3
+                        4   5   6
+                        7   8   9
+
+================================================================================
+Matrices and Arrays - Control Indexing
+================================================================================
+colon / end / ind2sub / sub2ind
+Function        Brief
+------------------------------------------------------------------------------------------------------------------------
+colon           Create vectors, array subscripting, and for-loop iterators.
+
+                e.g.
+                    1 : 2 : 9
+                        1   3   5   7   9
+
+                    1 : 4
+                        1   2   3   4
+
+                    2 : 0.5 : 5
+                        2.0000  2.5000  3.0000  3.5000  4.0000  4.5000  5.0000
+
+                    6 : -1 : 1
+                        6   5   4   3   2   1
+
+                e.g.
+                    data = [1 2 3; 4 5 6; 7 8 9]
+                        1   2   3
+                        4   5   6
+                        7   8   9
+
+                    data(2, :)
+                        4   5   6
+
+
+                    data(:, 3)
+                        3
+                        6
+                        9
+
+                    data(1 : 2, 2 : 3)
+                        2   3
+                        5   6
+
+                    data(:)
+                        1
+                        4
+                        7
+                        2
+                        5
+                        8
+                        3
+                        6
+                        9
+
+                e.g.
+                    for data = 1 : 3
+                        disp(data)
+                    end
+                        1
+                        2
+                        3
+
+                    for data = 'a' : 'd'
+                        disp(data)
+                    end
+                        a
+                        b
+                        c
+                        d
+
+end             Terminate a block of code, or indicate the last array element index.
+
+                e.g.
+                    if rand > 0.5
+                        disp('The generated random number is greater than 0.5.')
+                    else
+                        disp('The generated random number is equal to or less than 0.5.')
+                    end
+
+                    for data = 1 : 3
+                        disp(data)
+                    end
+
+                e.g.
+                    data = [1 2 3; 4 5 6; 7 8 9]
+                        1   2   3
+                        4   5   6
+                        7   8   9
+
+                    data(1, end)
+                        3
+
+                    data(2 : end, end - 1)
+                        5
+                        8
+
+ind2sub         Compute the subscripts from the linear indexes and return the result.
+
+                e.g.
+                    linearIndexes = [2 3 5 9];
+
+                    arraySize = [3 3];
+                        MC: [3 3] indicates the following array will be used in the computation.
+                        ----------------
+                        1   4   7
+                        2   5   8
+                        3   6   9
+                        ----------------
+                        MC: and the array's corresponding subscripts are as follows.
+                        ------------------------------------
+                        1, 1    1, 2    1, 3
+                        2, 1    2, 2    2, 3
+                        3, 1    3, 2    3, 3
+                        ------------------------------------
+
+                    [subscripts1, subscripts2] = ind2sub(arraySize, linearIndexes)
+                        subscripts1
+                            2   3   2   3
+
+                        subscripts2
+                            1   1   2   3
+
+sub2ind         Compute the linear indexes from the subscripts and return the result.
+
+                e.g.
+                    subscripts1 = [2 3 2 3];
+                    subscripts2 = [1 1 2 3];
+
+                    arraySize = [3 3];
+                        MC: [3 3] indicates the following array will be used in the computation.
+                        ----------------
+                        1   4   7
+                        2   5   8
+                        3   6   9
+                        ----------------
+                        MC: and the array's corresponding subscripts are as follows.
+                        ------------------------------------
+                        1, 1    1, 2    1, 3
+                        2, 1    2, 2    2, 3
+                        3, 1    3, 2    3, 3
+                        ------------------------------------
+
+                    linearIndexes = sub2ind(arraySize, subscripts1, subscripts2)
+                        2   3   5   9
+
+------------------------------------------------------------------------------------------------------------------------
 ver             Display information for MathWorks products.
 
                 e.g.
@@ -888,7 +1920,6 @@ openExample     Open an example.
                 Example
                     openExample('matlab/LinePlotsGSExample')    MC: An example named "LinePlotsGSExample" will be searched at the location
                                                                     "{MATLAB Installation}/examples/matlab" and then be opened.
-
 
 ========================================
 Code Snippets
@@ -968,6 +1999,9 @@ https://www.mathworks.com/help/matlab
 
 MATLAB Academy - MathWorks
 https://matlabacademy.mathworks.com/
+
+Videos and Webinars - MathWorks
+https://www.mathworks.com/videos.html
 
 MATLAB Programming - Wikibooks
 https://en.wikibooks.org/wiki/MATLAB_Programming
