@@ -10,3 +10,7 @@
 	path = temp3
 	url = D:/temp3
 	branch = master
+[submodule "temp4"]
+	path = temp4
+	url = D:/temp4/
+	branch = master
