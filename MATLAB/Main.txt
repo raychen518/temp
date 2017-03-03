@@ -46,7 +46,7 @@ Study Notes (at MathWorks)
     --------------------------------------------------------
     ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     Line Specification
-    Operators and Operations
+    Operators and Elementary Operations
     --------------------------------------------------------
 Function List
 Code Snippets
@@ -153,8 +153,7 @@ Contents (Points)
 MATLAB Panels
 MATLAB Designed for Matrices
 Variables as Arrays
-Arrays as Matrices
-Arrays as Vectors
+Arrays, Matrices and Vectors
 Long/Short Display Format
 Element-wise Operations
 Array Concatenation
@@ -201,19 +200,30 @@ Line Specification
   While other programming languages mostly work with numbers one at a time, MATLAB is designed to operate primarily on whole matrices and arrays.
 
 - Variables as Arrays
-  All MATLAB variables are multi-dimensional arrays, no matter what type of data.
+  All MATLAB variables are arrays.
 
-- Arrays as Matrices
-  A matrix is a 2D array.
+- Arrays, Matrices and Vectors
+  - Matrices are 2D arrays.
+    e.g.
+        A 3x4 Matrix
+           11  12  13  14
+           21  22  23  24
+           31  32  33  34
 
-- Arrays as Vectors
-  Vectors are special arrays.
-    A Row Vector
-        1 2 3
-    A Column Vector
-        1
-        2
-        3
+        A 3x3 Matrix
+            1   2   3
+            4   5   6
+            7   8   9
+
+  - Vectors are 1D arrays.
+    e.g.
+        A Row Vector
+            1 2 3
+
+        A Column Vector
+            1
+            2
+            3
 
 - Long/Short Display Format
   MATLAB stores numbers as floating-point values, and arithmetic operations are sensitive to small differences between the actual value and its floating-point representation.
@@ -890,19 +900,31 @@ Line Specification
       'c'                 Plot using the cyan color.
       'm'                 Plot using the magenta color.
 
-- Operators and Operations
-  Note: All corresponding functions of the operators are rarely used.
+- Operators and Elementary Operations
+  Note: All operators' corresponding functions are rarely used.
 
   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  Arithmetic (Addition, Subtraction, Multiplication, Division, Power, Rounding)
+  Arithmetic (Addition, Subtraction, Multiplication, Division, Power, Rounding, etc.)
+
   + plus      | - minus    | .* times   | * mtimes   | ./ rdivide | .\ ldivide | / mrdivide | \ mldivide |      (8)
   + uplus     | - uminus   | .^ power   | ^ mpower   |                                                          (4)
 
-  cumprod / cumsum / diff / movsum / prod / sum
-  ceil / fix / floor / idivide / mod / rem / round
-  bsxfun
+  sum         | cumsum     | diff       | prod       | cumprod    | XXXXX      | XXXXX      | XXXXX      |      (5)
+  -- SKIPPED ITEMS -----------------------------------------------------------------------------------------------------
+  movsum      |                                                                                                 (1)
+  ----------------------------------------------------------------------------------------------------------------------
 
+  idivide     | mod        | rem        |                                                                       (3)
+  fix         | round      | floor      | ceil       |                                                          (4)
+
+  -- SKIPPED ITEMS -----------------------------------------------------------------------------------------------------
+  bsxfun      |                                                                                                 (1)
+  ----------------------------------------------------------------------------------------------------------------------
+
+  XXXXX       | XXXXX      | XXXXX      | XXXXX      | XXXXX      | XXXXX      | XXXXX      | XXXXX      |      (?)
+  XXX           XXXXX           XXXXX.
   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
   Operator      Function        Description
   ------------------------------------------------------------------------------------------------------------------------
   +             plus            Perform an addition operation.
@@ -1376,7 +1398,7 @@ Line Specification
                                     [3 6 9]' \ data
                                         0.7143  0.8571  1.0000
 
-  +             uplus           Perform a plus operation.
+  +             uplus           Perform a (unary) plus operation.
 
                                 e.g. Make a scalar plus.
                                     +2
@@ -1396,7 +1418,7 @@ Line Specification
                                         4   5  -6
                                        -7   8   9
 
-  -             uminus          Perform a minus operation.
+  -             uminus          Perform a (unary) minus operation.
 
                                 e.g. Make a scalar minus.
                                     -2
@@ -1542,21 +1564,729 @@ Line Specification
                                     data ^ power
                                         <Error: Inputs must be a scalar and a square matrix.>
 
+  ----          sum             Calculate the sums of array elements.
 
-cumprod         Cumulative product
-cumsum          Cumulative sum
-diff            Differences and Approximate Derivatives
-movsum          Moving sum
-prod            Product of array elements
-sum             Sum of array elements
+                                e.g. Calculate the sums of a vector.
+                                    sum([1 2 3])
+                                        6
 
-ceil            Round toward positive infinity
-fix             Round toward zero
-floor           Round toward negative infinity
-idivide         Integer division with rounding option
-mod             Remainder after division (modulo operation)
-rem             Remainder after division
-round           Round to nearest decimal or integer
+                                    sum([1 2 3]')
+                                        6
+
+                                    sum(1:5)
+                                        15
+
+                                e.g. Calculate the sums of an array.
+                                    data = [1 2 3; 4 5 6; 7 8 9]
+                                        1   2   3
+                                        4   5   6
+                                        7   8   9
+
+                                    sum(data)
+                                       12  15  18
+
+                                    sum(data, 1)
+                                        12  15  18
+
+                                    sum(data, 2)
+                                        6
+                                       15
+                                       24
+
+                                    data = rand(4, 3, 2)
+                                        data(:, :, 1) =
+                                            0.5134  0.0309  0.3329
+                                            0.1776  0.9391  0.4671
+                                            0.3986  0.3013  0.6482
+                                            0.1339  0.2955  0.0252
+
+                                        data(:, :, 2) =
+                                            0.8422  0.4460  0.3308
+                                            0.5590  0.0542  0.8985
+                                            0.8541  0.1771  0.1182
+                                            0.3479  0.6628  0.9884
+
+                                    sum(data)
+                                        ans(:, :, 1) =
+                                            1.2235  1.5669  1.4734
+
+                                        ans(:, :, 2) =
+                                            2.6032  1.3402  2.3359
+
+                                    sum(data, 1)
+                                        ans(:, :, 1) =
+                                            1.2235  1.5669  1.4734
+
+                                        ans(:, :, 2) =
+                                            2.6032  1.3402  2.3359
+
+                                    sum(data, 2)
+                                        ans(:, :, 1) =
+                                            0.8772
+                                            1.5838
+                                            1.3481
+                                            0.4547
+
+                                        ans(:, :, 2) =
+                                            1.6191
+                                            1.5118
+                                            1.1494
+                                            1.9991
+
+                                    sum(data, 3)
+                                        1.3556    0.4769    0.6638
+                                        0.7366    0.9934    1.3656
+                                        1.2527    0.4784    0.7664
+                                        0.4818    0.9583    1.0136
+
+                                e.g. Calculate the sums of an array including NaN values.
+                                    data = [1 2 3; 4 NaN 6; 7 8 9]
+                                        1   2   3
+                                        4 NaN   6
+                                        7   8   9
+
+                                    sum(data)
+                                       12 NaN  18
+
+                                    % Perform the calculation, excluding NaN values.
+                                    sum(data, 'omitnan')
+                                       12  10  18
+
+  ----          cumsum          Calculate the cumulative sums of array elements.
+
+                                e.g. Calculate the cumulative sums of a vector.
+                                    cumsum([1 2 3])
+                                        1   3   6
+
+                                    cumsum([1 2 3]')
+                                        1
+                                        3
+                                        6
+
+                                    cumsum(1:5)
+                                        1   3   6   10  15
+
+                                e.g. Calculate the cumulative sums of an array.
+                                    data = [1 2 3; 4 5 6; 7 8 9]
+                                        1   2   3
+                                        4   5   6
+                                        7   8   9
+
+                                    cumsum(data)
+                                        1   2   3
+                                        5   7   9
+                                       12  15  18
+
+                                    cumsum(data, 1)
+                                        1   2   3
+                                        5   7   9
+                                       12  15  18
+
+                                    cumsum(data, 2)
+                                        1   3   6
+                                        4   9  15
+                                        7  15  24
+
+  ----          diff            Calculate the differences of array elements.
+
+                                e.g. Calculate the differences of a vector.
+                                    diff([2 5 7 3 8])
+                                        3   2  -4   5
+
+
+                                    diff([2 5 7 3 8]')
+                                        3
+                                        2
+                                       -4
+                                        5
+
+                                e.g. Calculate the differences of an array.
+                                    data = magic(3)
+                                        8   1   6
+                                        3   5   7
+                                        4   9   2
+
+                                    diff(data)
+                                       -5   4   1
+                                        1   4  -5
+
+                                    diff(data, 1, 1)
+                                       -5   4   1
+                                        1   4  -5
+
+                                    diff(data, 1, 2)
+                                       -7   5
+                                        2   2
+                                        5  -7
+
+                                    % The command "diff(data, 2)" is the same as the command "diff(diff(data))".
+                                    diff(data, 2)
+                                        6   0  -6
+
+                                e.g. Calculate the differences of some datetime values.
+                                    timings = [datetime];
+                                    for i = 1 : 4
+                                        timings = [timings timings(1, end) + minutes(randi([1, 5]))];
+                                    end
+
+                                    disp(timings);
+                                        03-Mar-2017 12:18:32   03-Mar-2017 12:19:32   03-Mar-2017 12:23:32   03-Mar-2017 12:28:32   03-Mar-2017 12:31:32
+
+                                    diff(timings)
+                                        <duration>
+                                        00:01:00   00:04:00   00:05:00   00:03:00
+
+  ----          prod            Calculate the products of array elements.
+
+                                e.g. Calculate the products of a vector.
+                                    prod([1 2 3 4])
+                                        24
+
+                                    prod([1 2 3 4]')
+                                        24
+
+                                e.g. Calculate the products of an array.
+                                    data = [1 2 3; 4 5 6; 7 8 9]
+                                        1   2   3
+                                        4   5   6
+                                        7   8   9
+
+                                    prod(data)
+                                       28  80 162
+
+                                    prod(data, 1)
+                                        12  15  18
+
+                                    prod(data, 2)
+                                        6
+                                      120
+                                      504
+
+                                    data = randi(9, 4, 3, 2)
+                                        data(:, :, 1) =
+                                            7   3   8
+                                            6   7   4
+                                            2   3   5
+                                            4   9   7
+
+                                        data(:, :, 2) =
+                                            8   5   1
+                                            6   7   7
+                                            6   8   4
+                                            3   7   4
+
+                                    prod(data)
+                                        ans(:, :, 1) =
+                                            336     567     1120
+
+                                        ans(:, :, 2) =
+                                            864     1960    112
+
+                                    prod(data, 1)
+                                        ans(:, :, 1) =
+                                            336     567     1120
+
+                                        ans(:, :, 2) =
+                                            864     1960    112
+
+                                    prod(data, 2)
+                                        ans(:, :, 1) =
+                                            168
+                                            168
+                                            30
+                                            252
+
+                                        ans(:, :, 2) =
+                                            40
+                                            294
+                                            192
+                                            84
+
+                                    prod(data, 3)
+                                           56  15   8
+                                           36  49  28
+                                           12  24  20
+                                           12  63  28
+
+                                e.g. Calculate the products of an array of logical values.
+                                    data = [true false true; false false true; false true true]
+                                        <logical>
+                                        1   0   1
+                                        0   0   1
+                                        0   1   1
+
+                                    prod(data)
+                                        0   0   1
+
+  ----          cumprod         Calculate the cumulative products of array elements.
+
+                                e.g. Calculate the cumulative products of a vector.
+                                    cumprod([1 2 3 4])
+                                        1   2   6  24
+
+                                    cumprod([1 2 3 4]')
+                                        1
+                                        2
+                                        6
+                                       24
+
+                                e.g. Calculate the cumulative products of an array.
+                                    data = [1 2 3; 4 5 6; 7 8 9]
+                                        1   2   3
+                                        4   5   6
+                                        7   8   9
+
+                                    cumprod(data)
+                                        1   2   3
+                                        4  10  18
+                                       28  80 162
+
+                                    cumprod(data, 1)
+                                        1   2   3
+                                        4  10  18
+                                       28  80 162
+
+                                    cumprod(data, 2)
+                                        1   2   6
+                                        4  20 120
+                                        7  56 504
+
+  ----          idivide         Perform an integer division (with rounding option) operation.
+
+                                e.g. Divide a scalar by another scalar.
+                                    idivide(int32(4), int32(2))
+                                        <int32>
+                                        2
+
+                                    idivide(int32(2), int32(4))
+                                        <int32>
+                                        0
+
+                                    idivide(int32(8), int32(3))
+                                        <int32>
+                                        2
+
+                                    idivide(int32(8), int32(3), 'fix')
+                                        <int32>
+                                        2
+
+                                    idivide(int32(8), int32(3), 'round')
+                                        <int32>
+                                        3
+
+                                    idivide(int32(8), int32(3), 'floor')
+                                        <int32>
+                                        2
+
+                                    idivide(int32(8), int32(3), 'ceil')
+                                        <int32>
+                                        3
+
+                                e.g. Divide an array by another array.
+                                    data1 = int32([2 3; 4 5])
+                                        <int32>
+                                        2   3
+                                        4   5
+
+                                    data2 = int32([6 7; 8 9])
+                                        <int32>
+                                        6   7
+                                        8   9
+
+                                    idivide(data2, data1)
+                                        <int32>
+                                        3   2
+                                        2   1
+
+                                    idivide(data2, data1, 'round')
+                                        <int32>
+                                        3   2
+                                        2   2
+
+  ----          mod             Get the remainders after performing a division operation (as a modulo operation).
+                                Note: Both the functions "mod" and "rem" get the remainders of a division operation.
+                                      Their differences are
+                                      1. The "mod" function produces a result that either is zero or has the same sign as the divisor; and
+                                         the "rem" function produces a result that either is zero or has the same sign as the dividend.
+                                      2. The "mod" function follows the convention that "mod(a, 0)" returns "a"; and
+                                         the "rem" function follows the convention that "mod(a, 0)" returns "NaN".
+
+                                e.g. Get the remainders after performing a division operation on 2 scalars.
+                                    mod(3, 2)
+                                        1
+
+                                    mod(4, 2)
+                                        0
+
+                                    mod(7, 4)
+                                        3
+
+                                    mod(3, -2)
+                                        -1
+
+                                    mod(-3, 2)
+                                        1
+
+                                    mod(3, 0)
+                                        3
+
+                                e.g. Get the remainders after performing a division operation on an vector and a scalar.
+                                    data = 1 : 5
+                                        1   2   3   4   5
+
+                                    mod(data, 2)
+                                        1   0   1   0   1
+
+                                    mod(data', 2)
+                                        1
+                                        0
+                                        1
+                                        0
+                                        1
+
+                                e.g. Get the remainders after performing a division operation on an array and a scalar.
+                                    data = [1 2 3; 4 5 6; 7 8 9]
+                                        1   2   3
+                                        4   5   6
+                                        7   8   9
+
+                                    mod(data, 2)
+                                        1   0   1
+                                        0   1   0
+                                        1   0   1
+
+                                e.g. Get the remainders after performing a division operation on 2 arrays.
+                                    data1 = [5 2; 3 4]
+                                        5   2
+                                        3   4
+
+                                    data2 = [4 9; 7 8]
+                                        4   9
+                                        7   8
+
+                                    mod(data2, data1)
+                                        4   1
+                                        1   0
+
+  ----          rem             Get the remainders after performing a division operation.
+
+                                e.g. Get the remainders after performing a division operation on 2 scalars.
+                                    rem(3, 2)
+                                        1
+
+                                    rem(4, 2)
+                                        0
+
+                                    rem(7, 4)
+                                        3
+
+                                    rem(3, -2)
+                                        1
+
+                                    rem(-3, 2)
+                                        -1
+
+                                    rem(3, 0)
+                                        NaN
+
+                                e.g. Get the remainders after performing a division operation on an vector and a scalar.
+                                    data = 1 : 5
+                                        1   2   3   4   5
+
+                                    rem(data, 2)
+                                        1   0   1   0   1
+
+                                    rem(data', 2)
+                                        1
+                                        0
+                                        1
+                                        0
+                                        1
+
+                                e.g. Get the remainders after performing a division operation on an array and a scalar.
+                                    data = [1 2 3; 4 5 6; 7 8 9]
+                                        1   2   3
+                                        4   5   6
+                                        7   8   9
+
+                                    rem(data, 2)
+                                        1   0   1
+                                        0   1   0
+                                        1   0   1
+
+                                e.g. Get the remainders after performing a division operation on 2 arrays.
+                                    data1 = [5 2; 3 4]
+                                        5   2
+                                        3   4
+
+                                    data2 = [4 9; 7 8]
+                                        4   9
+                                        7   8
+
+                                    rem(data2, data1)
+                                        4   1
+                                        1   0
+
+  ----          fix             Round array elements to the nearest integers toward zero, and return the result.
+                                For positives, the behavior of this function is the same as the function "floor";
+                                For negatives, the behavior of this function is the same as the function "ceil".
+
+                                e.g. Round a scalar.
+                                    fix(1.3)
+                                        1
+
+                                    fix(1.5)
+                                        1
+
+                                    fix(1.8)
+                                        1
+
+                                    fix(-1.3)
+                                       -1
+
+                                    fix(-1.5)
+                                       -1
+
+                                    fix(-1.8)
+                                       -1
+
+                                e.g. Round a vector.
+                                    data = [1.3 1.5 1.8 -1.3 -1.5 -1.8]
+                                        1.3000  1.5000  1.8000  -1.3000 -1.5000 -1.8000
+
+                                    fix(data)
+                                        1   1   1  -1  -1  -1
+
+                                    fix(data')
+                                        1
+                                        1
+                                        1
+                                       -1
+                                       -1
+                                       -1
+
+                                e.g. Round an array.
+                                    data = [1.3 1.5; 1.8 -1.3; -1.5 -1.8]
+                                        1.3000    1.5000
+                                        1.8000   -1.3000
+                                       -1.5000   -1.8000
+
+                                    fix(data)
+                                        1   1
+                                        1  -1
+                                       -1  -1
+
+  ----          round           Round array elements to the nearest decimals/integers, and return the result.
+
+                                e.g. Round a scalar.
+                                    round(1.3)
+                                        1
+
+                                    round(1.5)
+                                        2
+
+                                    round(1.8)
+                                        2
+
+                                    round(-1.3)
+                                       -1
+
+                                    round(-1.5)
+                                       -2
+
+                                    round(-1.8)
+                                       -2
+
+                                e.g. Round a scalar (specifying the digits).
+                                    data = 567.56789;
+
+                                    round(data)
+                                        568
+
+                                    round(data, 1)
+                                        567.6000
+
+                                    round(data, 2)
+                                        567.5700
+
+                                    round(data, 3)
+                                        567.5680
+
+                                    round(data, 0)
+                                        568
+
+                                    round(data, -1)
+                                        570
+
+                                    round(data, -2)
+                                        600
+
+                                    data = 567;
+
+                                    round(data, 2)
+                                        567
+
+                                e.g. Round a vector.
+                                    data = [1.3 1.5 1.8 -1.3 -1.5 -1.8]
+                                        1.3000  1.5000  1.8000  -1.3000 -1.5000 -1.8000
+
+                                    round(data)
+                                        1   2   2  -1  -2  -2
+
+                                    round(data')
+                                        1
+                                        2
+                                        2
+                                       -1
+                                       -2
+                                       -2
+
+                                e.g. Round an array.
+                                    data = [1.3 1.5; 1.8 -1.3; -1.5 -1.8]
+                                        1.3000    1.5000
+                                        1.8000   -1.3000
+                                       -1.5000   -1.8000
+
+                                    round(data)
+                                        1   2
+                                        2  -1
+                                       -2  -2
+
+                                e.g. Round some duration values.
+                                    timings = hours(8) + minutes(29:31) + seconds(1.3:0.5:2.5);
+                                    timings.Format = 'hh:mm:ss.SS'
+                                        <duration>
+                                        08:29:01.30   08:30:01.80   08:31:02.30
+
+                                    round(timings)
+                                        <duration>
+                                        08:29:01.00   08:30:02.00   08:31:02.00
+
+                                    round(timings, 'hours')
+                                        <duration>
+                                        08:00:00.00   09:00:00.00   09:00:00.00
+
+  ----          floor           Round array elements to the negative infinity, and return the result.
+
+                                e.g. Round a scalar.
+                                    floor(1.3)
+                                        1
+
+                                    floor(1.5)
+                                        1
+
+                                    floor(1.8)
+                                        1
+
+                                    floor(-1.3)
+                                       -2
+
+                                    floor(-1.5)
+                                       -2
+
+                                    floor(-1.8)
+                                       -2
+
+                                e.g. Round a vector.
+                                    data = [1.3 1.5 1.8 -1.3 -1.5 -1.8]
+                                        1.3000  1.5000  1.8000  -1.3000 -1.5000 -1.8000
+
+                                    floor(data)
+                                        1   1   1  -2  -2  -2
+
+                                    floor(data')
+                                        1
+                                        1
+                                        1
+                                       -2
+                                       -2
+                                       -2
+
+                                e.g. Round an array.
+                                    data = [1.3 1.5; 1.8 -1.3; -1.5 -1.8]
+                                        1.3000    1.5000
+                                        1.8000   -1.3000
+                                       -1.5000   -1.8000
+
+                                    floor(data)
+                                        1   1
+                                        1  -2
+                                       -2  -2
+
+                                e.g. Round some duration values.
+                                    timings = hours(8) + minutes(29:31) + seconds(1.3:0.5:2.5);
+                                    timings.Format = 'hh:mm:ss.SS'
+                                        <duration>
+                                        08:29:01.30   08:30:01.80   08:31:02.30
+
+                                    floor(timings)
+                                        <duration>
+                                        08:29:01.00   08:30:01.00   08:31:02.00
+
+                                    floor(timings, 'hours')
+                                        <duration>
+                                        08:00:00.00   08:00:00.00   08:00:00.00
+
+  ----          ceil            Round array elements to the positive infinity, and return the result.
+
+                                e.g. Round a scalar.
+                                    ceil(1.3)
+                                        2
+
+                                    ceil(1.5)
+                                        2
+
+                                    ceil(1.8)
+                                        2
+
+                                    ceil(-1.3)
+                                       -1
+
+                                    ceil(-1.5)
+                                       -1
+
+                                    ceil(-1.8)
+                                       -1
+
+                                e.g. Round a vector.
+                                    data = [1.3 1.5 1.8 -1.3 -1.5 -1.8]
+                                        1.3000  1.5000  1.8000  -1.3000 -1.5000 -1.8000
+
+                                    ceil(data)
+                                        2   2   2  -1  -1  -1
+
+                                    ceil(data')
+                                        2
+                                        2
+                                        2
+                                       -1
+                                       -1
+                                       -1
+
+                                e.g. Round an array.
+                                    data = [1.3 1.5; 1.8 -1.3; -1.5 -1.8]
+                                        1.3000    1.5000
+                                        1.8000   -1.3000
+                                       -1.5000   -1.8000
+
+                                    ceil(data)
+                                        2   2
+                                        2  -1
+                                       -1  -1
+
+                                e.g. Round some duration values.
+                                    timings = hours(8) + minutes(29:31) + seconds(1.3:0.5:2.5);
+                                    timings.Format = 'hh:mm:ss.SS'
+                                        <duration>
+                                        08:29:01.30   08:30:01.80   08:31:02.30
+
+                                    ceil(timings)
+                                        <duration>
+                                        08:29:02.00   08:30:02.00   08:31:03.00
+
+                                    ceil(timings, 'hours')
+                                        <duration>
+                                        09:00:00.00   09:00:00.00   09:00:00.00
 
 bsxfun          Apply element-wise operation to two arrays with implicit expansion enabled
 
