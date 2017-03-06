@@ -915,7 +915,7 @@ Line Specification
   + plus      | - minus    | .* times   | * mtimes   | ./ rdivide | .\ ldivide | / mrdivide | \ mldivide |      (8)
   + uplus     | - uminus   | .^ power   | ^ mpower   |                                                          (4)
 
-  sum         | cumsum     | diff       | prod       | cumprod    | XXXXX      | XXXXX      | XXXXX      |      (5)
+  sum         | cumsum     | diff       | prod       | cumprod    |                                             (5)
   -- SKIPPED ITEMS -----------------------------------------------------------------------------------------------------
   movsum      |                                                                                                 (1)
   ----------------------------------------------------------------------------------------------------------------------
@@ -2292,7 +2292,7 @@ Line Specification
                                         09:00:00.00   09:00:00.00   09:00:00.00
 
   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  Relational Operators/Operations
+  Relational Operators/Operations (Various Value Comparisons)
 
   XXXXX       | XXXXX      | XXXXX      | XXXXX      | XXXXX      | XXXXX      | XXXXX      | XXXXX      |      (?)
   == eq       | ~= ne      | < lt       | <= le      | > gt       | >= ge      |                                (6)
@@ -2307,11 +2307,11 @@ Line Specification
   ==            eq              Compare array elements to see whether some ones are equal to the other ones, and return the result.
 
                                 e.g. Compare a scalar with another scalar.
-                                    2 == 2
+                                    1 == 1
                                         <logical>
                                         1
 
-                                    2 == 3
+                                    1 == 2
                                         <logical>
                                         0
 
@@ -2328,6 +2328,26 @@ Line Specification
                                         1
 
                                     true == false
+                                        <logical>
+                                        0
+
+                                    'a' == 1
+                                        <logical>
+                                        0
+
+                                    'a' == 97
+                                        <logical>
+                                        1
+
+                                    true == 0
+                                        <logical>
+                                        0
+
+                                    true == 1
+                                        <logical>
+                                        1
+
+                                    1 == NaN
                                         <logical>
                                         0
 
@@ -2400,6 +2420,17 @@ Line Specification
                                         1   0   0
                                         0   0   1
 
+                                    data3 = [5 4 8; 9 NaN 2; 1 6 3]
+                                        5   4   8
+                                        9  NaN  2
+                                        1   6   3
+
+                                    data1 == data3
+                                        <logical>
+                                        1   1   1
+                                        1   0   1
+                                        1   1   1
+
                                 e.g. Find characters.
                                     data = 'Hello, World!';
                                     % Each occurrence of 1 in the result means a character found.
@@ -2420,11 +2451,11 @@ Line Specification
   ~=            ne              Compare array elements to see whether some ones are not equal to the other ones, and return the result.
 
                                 e.g. Compare a scalar with another scalar.
-                                    2 ~= 2
+                                    1 ~= 1
                                         <logical>
                                         0
 
-                                    2 ~= 3
+                                    1 ~= 2
                                         <logical>
                                         1
 
@@ -2441,6 +2472,26 @@ Line Specification
                                         0
 
                                     true ~= false
+                                        <logical>
+                                        1
+
+                                    'a' ~= 1
+                                        <logical>
+                                        1
+
+                                    'a' ~= 97
+                                        <logical>
+                                        0
+
+                                    true ~= 0
+                                        <logical>
+                                        1
+
+                                    true ~= 1
+                                        <logical>
+                                        0
+
+                                    1 ~= NaN
                                         <logical>
                                         1
 
@@ -2513,6 +2564,17 @@ Line Specification
                                         0   1   1
                                         1   1   0
 
+                                    data3 = [5 4 8; 9 NaN 2; 1 6 3]
+                                        5   4   8
+                                        9  NaN  2
+                                        1   6   3
+
+                                    data1 ~= data3
+                                        <logical>
+                                        0   0   0
+                                        0   1   0
+                                        0   0   0
+
                                 e.g. Find characters.
                                     data = 'Hello, World!';
                                     % Each occurrence of 0 in the result means a character found.
@@ -2531,7 +2593,407 @@ Line Specification
                                         1
 
   <             lt              Compare array elements to see whether some ones are less than the other ones, and return the result.
+                                Note: The comparison is only for numbers. This function returns false (logical 0), if either of operands is NaN or undefined categorical elements.
+
+                                e.g. Compare a scalar with another scalar.
+                                    2 < 1
+                                        <logical>
+                                        0
+
+                                    2 < 2
+                                        <logical>
+                                        0
+
+                                    2 < 3
+                                        <logical>
+                                        1
+
+                                    'b' < 'a'
+                                        <logical>
+                                        0
+
+                                    'b' < 'b'
+                                        <logical>
+                                        0
+
+                                    'b' < 'c'
+                                        <logical>
+                                        1
+
+                                    true < false
+                                        <logical>
+                                        0
+
+                                    true < true
+                                        <logical>
+                                        0
+
+                                    false < true
+                                        <logical>
+                                        1
+
+                                    'a' < 96
+                                        <logical>
+                                        0
+
+                                    'a' < 97
+                                        <logical>
+                                        0
+
+                                    'a' < 98
+                                        <logical>
+                                        1
+
+                                    true < 0
+                                        <logical>
+                                        0
+
+                                    true < 1
+                                        <logical>
+                                        0
+
+                                    true < 2
+                                        <logical>
+                                        1
+
+                                    1 < NaN
+                                        <logical>
+                                        0
+
+                                    NaN < 1
+                                        <logical>
+                                        0
+
+                                e.g. Compare a vector and a scalar.
+                                    [1 2 3] < 2
+                                        <logical>
+                                        1   0   0
+
+                                    [1 2 3]' < 2
+                                        <logical>
+                                        1
+                                        0
+                                        0
+
+                                e.g. Compare a vector and another vector.
+                                    [1 2 3] < [2 2 2]
+                                        <logical>
+                                        1   0   0
+
+                                    [1 2 3]' < [2 2 2]'
+                                        <logical>
+                                        1
+                                        0
+                                        0
+
+                                e.g. Compare an array with a scalar.
+                                    data = [1 2 3; 4 5 6; 7 8 9]
+                                        1   2   3
+                                        4   5   6
+                                        7   8   9
+
+                                    data < 5
+                                        <logical>
+                                        1   1   1
+                                        1   0   0
+                                        0   0   0
+
+                                e.g. Compare an array with a vector.
+                                    data = [1 2 3; 4 5 6; 7 8 9]
+                                        1   2   3
+                                        4   5   6
+                                        7   8   9
+
+                                    data < [4 5 6]
+                                        <logical>
+                                        1   1   1
+                                        0   0   0
+                                        0   0   0
+
+                                    data < [4 5 6]'
+                                        <logical>
+                                        1   1   1
+                                        1   0   0
+                                        0   0   0
+
+                                e.g. Compare an array with another array.
+                                    data1 = [5 4 8; 9 7 2; 1 6 3]
+                                        5   4   8
+                                        9   7   2
+                                        1   6   3
+
+                                    data2 = [2 4 7; 9 5 6; 8 1 3]
+                                        2   4   7
+                                        9   5   6
+                                        8   1   3
+
+                                    data1 < data2
+                                        <logical>
+                                        0   0   0
+                                        0   0   1
+                                        1   0   0
+
+                                    data3 = [5 4 8; 9 NaN 2; 1 6 3]
+                                        5   4   8
+                                        9  NaN  2
+                                        1   6   3
+
+                                    data1 < data3
+                                        <logical>
+                                        0   0   0
+                                        0   0   0
+                                        0   0   0
+
+                                    data3 < data1
+                                        <logical>
+                                        0   0   0
+                                        0   0   0
+                                        0   0   0
+
+                                e.g. Compare a datetime with another datetime.
+                                    dataTime1 = datetime()
+                                        <datetime>
+                                        06-Mar-2017 12:31:11
+
+                                    dataTime2 = datetime('1977/05/18 12:34:56', 'InputFormat', 'yyyy/MM/dd HH:mm:ss')
+                                        <datetime>
+                                        18-May-1977 12:34:56
+
+                                    dataTime1 < dataTime2
+                                        <logical>
+                                        0
+
+                                e.g. Find and replace some array elements by comparison.
+                                    data = [1 2 3; 4 5 6; 7 8 9]
+                                        1   2   3
+                                        4   5   6
+                                        7   8   9
+
+                                    data(data < 5)
+                                        1
+                                        4
+                                        2
+                                        3
+
+                                    data(data < 5) = 0
+                                        0   0   0
+                                        0   5   6
+                                        7   8   9
+
+                                e.g. Compare using the function.
+                                    lt(2, 1)
+                                        <logical>
+                                        0
+
+                                    lt(2, 2)
+                                        <logical>
+                                        0
+
+                                    lt(2, 3)
+                                        <logical>
+                                        1
+
   <=            le              Compare array elements to see whether some ones are less than or equal to the other ones, and return the result.
+
+                                e.g. Compare a scalar with another scalar.
+                                    2 <= 1
+                                        <logical>
+                                        0
+
+                                    2 <= 2
+                                        <logical>
+                                        1
+
+                                    2 <= 3
+                                        <logical>
+                                        1
+
+                                    'b' <= 'a'
+                                        <logical>
+                                        0
+
+                                    'b' <= 'b'
+                                        <logical>
+                                        1
+
+                                    'b' <= 'c'
+                                        <logical>
+                                        1
+
+                                    true <= false
+                                        <logical>
+                                        0
+
+                                    true <= true
+                                        <logical>
+                                        1
+
+                                    false <= true
+                                        <logical>
+                                        1
+
+                                    'a' <= 96
+                                        <logical>
+                                        0
+
+                                    'a' <= 97
+                                        <logical>
+                                        1
+
+                                    'a' <= 98
+                                        <logical>
+                                        1
+
+                                    true <= 0
+                                        <logical>
+                                        0
+
+                                    true <= 1
+                                        <logical>
+                                        1
+
+                                    true <= 2
+                                        <logical>
+                                        1
+
+                                    1 <= NaN
+                                        <logical>
+                                        0
+
+                                    NaN <= 1
+                                        <logical>
+                                        0
+
+                                e.g. Compare a vector and a scalar.
+                                    [1 2 3] <= 2
+                                        <logical>
+                                        1   1   0
+
+                                    [1 2 3]' <= 2
+                                        <logical>
+                                        1
+                                        1
+                                        0
+
+                                e.g. Compare a vector and another vector.
+                                    [1 2 3] <= [2 2 2]
+                                        <logical>
+                                        1   1   0
+
+                                    [1 2 3]' <= [2 2 2]'
+                                        <logical>
+                                        1
+                                        1
+                                        0
+
+                                e.g. Compare an array with a scalar.
+                                    data = [1 2 3; 4 5 6; 7 8 9]
+                                        1   2   3
+                                        4   5   6
+                                        7   8   9
+
+                                    data <= 5
+                                        <logical>
+                                        1   1   1
+                                        1   1   0
+                                        0   0   0
+
+                                e.g. Compare an array with a vector.
+                                    data = [1 2 3; 4 5 6; 7 8 9]
+                                        1   2   3
+                                        4   5   6
+                                        7   8   9
+
+                                    data <= [4 5 6]
+                                        <logical>
+                                        1   1   1
+                                        1   1   1
+                                        0   0   0
+
+                                    data <= [4 5 6]'
+                                        <logical>
+                                        1   1   1
+                                        1   1   0
+                                        0   0   0
+
+                                e.g. Compare an array with another array.
+                                    data1 = [5 4 8; 9 7 2; 1 6 3]
+                                        5   4   8
+                                        9   7   2
+                                        1   6   3
+
+                                    data2 = [2 4 7; 9 5 6; 8 1 3]
+                                        2   4   7
+                                        9   5   6
+                                        8   1   3
+
+                                    data1 <= data2
+                                        <logical>
+                                        0   1   0
+                                        1   0   1
+                                        1   0   1
+
+                                    data3 = [5 4 8; 9 NaN 2; 1 6 3]
+                                        5   4   8
+                                        9  NaN  2
+                                        1   6   3
+
+                                    data1 <= data3
+                                        <logical>
+                                        1   1   1
+                                        1   0   1
+                                        1   1   1
+
+                                    data3 <= data1
+                                        <logical>
+                                        1   1   1
+                                        1   0   1
+                                        1   1   1
+
+                                e.g. Compare a datetime with another datetime.
+                                    dataTime1 = datetime()
+                                        <datetime>
+                                        06-Mar-2017 12:31:11
+
+                                    dataTime2 = datetime('1977/05/18 12:34:56', 'InputFormat', 'yyyy/MM/dd HH:mm:ss')
+                                        <datetime>
+                                        18-May-1977 12:34:56
+
+                                    dataTime1 <= dataTime2
+                                        <logical>
+                                        0
+
+                                e.g. Find and replace some array elements by comparison.
+                                    data = [1 2 3; 4 5 6; 7 8 9]
+                                        1   2   3
+                                        4   5   6
+                                        7   8   9
+
+                                    data(data <= 5)
+                                        1
+                                        4
+                                        2
+                                        5
+                                        3
+
+                                    data(data <= 5) = 0
+                                        0   0   0
+                                        0   0   6
+                                        7   8   9
+
+                                e.g. Compare using the function.
+                                    le(2, 1)
+                                        <logical>
+                                        0
+
+                                    le(2, 2)
+                                        <logical>
+                                        1
+
+                                    le(2, 3)
+                                        <logical>
+                                        1
+
   >             gt              Compare array elements to see whether some ones are greater than the other ones, and return the result.
   >=            ge              Compare array elements to see whether some ones are greater than or equal to the other ones, and return the result.
   ----          isequal         Compare arrays and return whether they are equal.
