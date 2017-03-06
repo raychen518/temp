@@ -1730,7 +1730,7 @@ Line Specification
                                 e.g. Calculate the differences of some datetime values.
                                     timings = [datetime];
                                     for i = 1 : 4
-                                        timings = [timings timings(1, end) + minutes(randi([1, 5]))];
+                                        timings = [timings timings(1, end) + minutes(randi(5))];
                                     end
 
                                     disp(timings);
@@ -1759,7 +1759,7 @@ Line Specification
                                        28  80 162
 
                                     prod(data, 1)
-                                        12  15  18
+                                        28  80 162
 
                                     prod(data, 2)
                                         6
