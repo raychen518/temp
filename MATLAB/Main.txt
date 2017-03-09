@@ -3631,6 +3631,7 @@ Line Specification
 
   XXXXX       | XXXXX      | XXXXX      | XXXXX      | XXXXX      | XXXXX      | XXXXX      | XXXXX      |      (?)
   ~ not       | & and      | | or       | xor        | && and (SC)| || or (SC) |                                (6)
+  true        | false      | any        | all        | find       | islogical  | logical    |                   (7)
   Note: SC here means the operator employs the short-circuiting behavior.
 
   XXX           XXXXX           XXXXX.
@@ -4167,9 +4168,510 @@ Line Specification
 
   &&            and (SC)        Perform a logic AND operation (employing the short-circuiting behavior).
                                 Note: For examples, refer to the operator "& (and)".
-  
+
   ||            or (SC)         Perform a logic OR operation (employing the short-circuiting behavior).
                                 Note: For examples, refer to the function "| (or)".
+
+  ----          true            Return an array which all elements are logical 1 (true).
+                                <For other details, see Function List - Matrices and Arrays - Create and Combine Arrays - true>
+
+  ----          false           Return an array which all elements are logical 0 (false).
+                                <For other details, see Function List - Matrices and Arrays - Create and Combine Arrays - false>
+
+  ----          any             Determine if any array elements are nonzero.
+                                Note: The empty strings, the logic zeros and the NaN values are treated as zeros.
+
+                                e.g. Test scalars.
+                                    any(0)
+                                        <logical>
+                                            0
+
+                                    any(3)
+                                        <logical>
+                                            1
+
+                                    any('a')
+                                        <logical>
+                                            1
+
+                                    any(false)
+                                        <logical>
+                                            0
+
+                                    any(true)
+                                        <logical>
+                                            1
+
+                                    any(NaN)
+                                        <logical>
+                                            0
+
+                                e.g. Test vectors.
+                                    any([0 0 0])
+                                        <logical>
+                                            0
+
+                                    any([0 0 0]')
+                                        <logical>
+                                            0
+
+                                    any([0 3 0])
+                                        <logical>
+                                            1
+
+                                e.g. Test arrays.
+                                    any(zeros(4, 3))
+                                        <logical>
+                                            0   0   0
+
+                                    any(ones(4, 3))
+                                        <logical>
+                                            1   1   1
+
+                                    % The empty string is a 0x0 empty char array instead of a scalar.
+                                    % And per the documentation, if the input is an empty 0x0 matrix, the function returns logical 0 (false).
+                                    any('')
+                                        <logical>
+                                            0
+
+                                    data = [4 0 0 1; 9 0 2 0; 0 0 0 0; 7 0 8 5]
+                                        4   0   0   1
+                                        9   0   2   0
+                                        0   0   0   0
+                                        7   0   8   5
+
+                                    any(data)
+                                        <logical>
+                                            1   0   1   1
+
+                                    any(data, 1)
+                                        <logical>
+                                            1   0   1   1
+
+                                    any(data, 2)
+                                        <logical>
+                                            1
+                                            1
+                                            0
+                                            1
+
+                                    any(data, 3)
+                                        <logical>
+                                            1   0   0   1
+                                            1   0   1   0
+                                            0   0   0   0
+                                            1   0   1   1
+
+                                e.g. Reduce a logical vector to a single condition #1.
+                                    data = [0.53 0.67 0.01 0.38 0.07 0.42 0.69];
+                                    mapForDataBelowPointFive = data < 0.5
+                                        0   0   1   1   1   1   0
+
+                                    if any(mapForDataBelowPointFive)
+                                        disp('There is at least one data item which value is below 0.5.');
+                                    else
+                                        disp('There is no data item which value is below 0.5.');
+                                    end
+
+                                    % The statement "if any(mapForDataBelowPointFive)" can be refined to as follows.
+                                    %               "if any(data < 0.5)"
+
+                                e.g. Reduce a logical vector to a single condition #2.
+                                    data = rand(3, 4) * 5;
+
+                                    % The syntax "data(:)" turns all the elements of "data" into a single column vector.
+                                    % This type of statements can be used on arrays of any size.
+                                    if any(data(:) > 3)
+                                        disp('There is at least one data item which value is beyond 3.');
+                                    else
+                                        disp('There is no data item which value is beyond 3.');
+                                    end
+
+  ----          all             Determine if all array elements are nonzero/true.
+
+                                e.g. Test scalars.
+                                    all(0)
+                                        <logical>
+                                            0
+
+                                    all(3)
+                                        <logical>
+                                            1
+
+                                    all('a')
+                                        <logical>
+                                            1
+
+                                    all(false)
+                                        <logical>
+                                            0
+
+                                    all(true)
+                                        <logical>
+                                            1
+
+                                    all(NaN)
+                                        <logical>
+                                            1
+
+                                e.g. Test vectors.
+                                    all([0 0 0])
+                                        <logical>
+                                            0
+
+                                    all([0 0 0]')
+                                        <logical>
+                                            0
+
+                                    all([0 3 0])
+                                        <logical>
+                                            1
+
+                                    all([1 2 3])
+                                        <logical>
+                                            1
+
+                                e.g. Test arrays.
+                                    all(zeros(4, 3))
+                                        <logical>
+                                            0   0   0
+
+                                    all(ones(4, 3))
+                                        <logical>
+                                            1   1   1
+
+                                    % The empty string is a 0x0 empty char array instead of a scalar.
+                                    % And per the documentation, if the input is an empty 0x0 matrix, the function returns logical 1 (true).
+                                    all('')
+                                        <logical>
+                                            1
+
+                                    data = [4 0 9 0; 9 6 2 0; 0 0 3 1; 7 4 8 5]
+                                        4   0   9   0
+                                        9   6   2   0
+                                        0   0   3   1
+                                        7   4   8   5
+
+                                    all(data)
+                                        <logical>
+                                            0   0   1   0
+
+                                    all(data, 1)
+                                        <logical>
+                                            0   0   1   0
+
+                                    all(data, 2)
+                                        <logical>
+                                            0
+                                            0
+                                            0
+                                            1
+
+                                    all(data, 3)
+                                        <logical>
+                                            1   0   1   0
+                                            1   1   1   0
+                                            0   0   1   1
+                                            1   1   1   1
+
+                                e.g. Reduce a logical vector to a single condition #1.
+                                    data = [0.53 0.67 0.01 0.38 0.07 0.42 0.69];
+                                    mapForDataBelowPointFive = data < 0.5
+                                        0   0   1   1   1   1   0
+
+                                    if all(mapForDataBelowPointFive)
+                                        disp('All data items have their values being below 0.5.');
+                                    else
+                                        disp('Not all data items have their values being below 0.5.');
+                                    end
+
+                                    % The statement "if all(mapForDataBelowPointFive)" can be refined to as follows.
+                                    %               "if all(data < 0.5)"
+
+                                e.g. Reduce a logical vector to a single condition #2.
+                                    data = rand(3, 4) * 5;
+
+                                    if all(data(:) > 3)
+                                        disp('All data items have their values being beyond 3.');
+                                    else
+                                        disp('Not all data items have their values being beyond 3.');
+                                    end
+
+  ----          find            Find indices and values of nonzero array elements.
+
+                                e.g. Find on scalars.
+                                    find(0)
+                                        []
+
+                                    find(1)
+                                        1
+
+                                    find(2)
+                                        1
+
+                                    find('')
+                                        []
+
+                                    find('a')
+                                        1
+
+                                    find(false)
+                                        []
+
+                                    find(true)
+                                        1
+
+                                e.g. Find on vectors.
+                                    find([0 0 0])
+                                        <1x0 empty double row vector>
+
+                                    find([1 1 1])
+                                        1   2   3
+
+                                    find([1 0 2 0 3])
+                                        1   3   5
+
+                                    find([1 0 2 0 3]')
+                                        1
+                                        3
+                                        5
+
+                                e.g. Find on arrays.
+                                    find(zeros(3))
+                                        <0x1 empty double column vector>
+
+                                    find(ones(3))
+                                        1
+                                        2
+                                        3
+                                        4
+                                        5
+                                        6
+                                        7
+                                        8
+                                        9
+
+                                    data = [1 0 0; 0 5 0; 7 0 9]
+                                        1   0   0
+                                        0   5   0
+                                        7   0   9
+
+                                    find(data)
+                                        1
+                                        3
+                                        5
+                                        9
+
+                                    find(~data)
+                                        2
+                                        4
+                                        6
+                                        7
+                                        8
+
+                                    % Get the first 3 indices.
+                                    find(data, 3)
+                                        1
+                                        3
+                                        5
+
+                                    find(data, 3, 'first')
+                                        1
+                                        3
+                                        5
+
+                                    % Get the last 3 indices.
+                                    find(data, 3, 'last')
+                                        3
+                                        5
+                                        9
+
+                                    % Get the row and column subscripts.
+                                    [rowSubscripts, columnSubscripts] = find(data)
+                                        rowSubscripts =
+                                            1
+                                            3
+                                            2
+                                            3
+
+                                        columnSubscripts =
+                                            1
+                                            1
+                                            2
+                                            3
+
+                                    % Get the row and column subscripts, and the values.
+                                    [rowSubscripts, columnSubscripts, values] = find(data)
+                                        rowSubscripts =
+                                            1
+                                            3
+                                            2
+                                            3
+
+                                        columnSubscripts =
+                                            1
+                                            1
+                                            2
+                                            3
+
+                                        values =
+                                            1
+                                            7
+                                            5
+                                            9
+
+                                e.g. Find array elements satisfying a condition.
+                                    data = magic(4)
+                                           16   2   3  13
+                                            5  11  10   8
+                                            9   7   6  12
+                                            4  14  15   1
+
+                                    % Solution #1: Find the first 5 array elements which is less than 10.
+                                    indicesOfFirst5ElementsLessThan10 = find(data < 10, 5)
+                                        2
+                                        3
+                                        4
+                                        5
+                                        7
+
+                                    data(indicesOfFirst5ElementsLessThan10)
+                                        5
+                                        9
+                                        4
+                                        2
+                                        7
+
+                                    % Solution #2: Find the first 5 array elements which is less than 10.
+                                    elementsLessThan10 = data(data < 10)
+                                        5
+                                        9
+                                        4
+                                        2
+                                        7
+                                        3
+                                        6
+                                        8
+                                        1
+
+                                    elementsLessThan10(1:5)
+                                        5
+                                        9
+                                        4
+                                        2
+                                        7
+
+                                e.g. Find array elements equal to specific values.
+                                    % Find integers.
+                                    data = [3 7 2 11; 9 4 7 5; 7 0 8 1; 15 6 10 7]
+                                        3   7   2  11
+                                        9   4   7   5
+                                        7   0   8   1
+                                       15   6  10   7
+
+                                    find(data == 7)
+                                        3
+                                        5
+                                       10
+                                       16
+
+                                    % Find floating-point numbers.
+                                        data = 0 : 0.1 : 1
+                                            0   0.1000  0.2000  0.3000  0.4000  0.5000  0.6000  0.7000  0.8000  0.9000  1.0000
+
+                                        % The value 0.3 cannot be found due to the floating-point roundoff error.
+                                        find(data == 0.3)
+                                            <1×0 empty double row vector>
+
+                                        % As a workaround, use a tolerance value.
+                                        find(abs(data - 0.3) < 0.001)
+                                            4
+
+                                e.g. Find last several nonzero array elements.
+                                    data = magic(6)
+                                       35   1   6  26  19  24
+                                        3  32   7  21  23  25
+                                       31   9   2  22  27  20
+                                        8  28  33  17  10  15
+                                       30   5  34  12  14  16
+                                        4  36  29  13  18  11
+
+                                    % Change all odd-indexed array elements to zero.
+                                    data(1 : 2 : end) = 0
+
+                                    % Find the last 5 nonzero array elements.
+                                    find(data, 5, 'last')
+                                        28
+                                        30
+                                        32
+                                        34
+                                        36
+
+                                e.g. Find first 3 array elements that are greater than 0 and less than 10.
+                                    data = [12 -3 -2 -3 8; 14 0 15 3 -5; -3 6 15 14 12; 14 15 5 11 14; 8 15 11 15 9]
+                                        12    -3    -2    -3     8
+                                        14     0    15     3    -5
+                                        -3     6    15    14    12
+                                        14    15     5    11    14
+                                         8    15    11    15     9
+
+                                    [rowSubscripts, columnSubscripts] = find(data > 0 & data < 10, 3)
+                                        rowSubscripts =
+                                            5
+                                            3
+                                            4
+
+                                        columnSubscripts =
+                                            1
+                                            2
+                                            3
+
+                                e.g. Check subscripts of multidimensional arrays.
+                                    data = zeros(4, 2, 3);
+                                    data([1 12 19 21]) = 1
+                                        data(:, :, 1) =
+                                            1   0
+                                            0   0
+                                            0   0
+                                            0   0
+
+                                        data(:, :, 2) =
+                                            0   0
+                                            0   0
+                                            0   0
+                                            1   0
+
+                                        data(:, :, 3) =
+                                            0   1
+                                            0   0
+                                            1   0
+                                            0   0
+
+                                        -->
+
+                                            1   0   0   0   0   1
+                                            0   0   0   0   0   0
+                                            0   0   0   0   1   0
+                                            0   0   1   0   0   0
+                                            | data(:, :, 1)
+                                                    | data(:, :, 2)
+                                                            | data(:, :, 3)
+
+                                    [rowSubscripts, columnSubscripts] = find(data)
+                                        rowSubscripts =
+                                            1
+                                            4
+                                            3
+                                            1
+
+                                        columnSubscripts =
+                                            1
+                                            3
+                                            5
+                                            6
+
+  ----          islogical       Determine if the input is a logical array.
+  ----          logical         Convert numeric values to logical values.
 
 ========================================
 Function List
@@ -4329,17 +4831,83 @@ cat             Concatenate arrays along the specified dimension and return the 
                             5   6
                             7   8
 
-true            Return the logical 1 (true).
+true            Return an array which all elements are logical 1 (true).
 
                 e.g.
                     true
-                        (logical) 1
+                        <logical>
+                            1
 
-false           Return the logical 0 (false).
+                    true(3)
+                        <logical>
+                            1   1   1
+                            1   1   1
+                            1   1   1
+
+                    true(4, 3)
+                        <logical>
+                            1   1   1
+                            1   1   1
+                            1   1   1
+                            1   1   1
+
+                    true(4, 3, 2)
+                        <logical>
+                            1   1   1
+                            1   1   1
+                            1   1   1
+                            1   1   1
+
+                            1   1   1
+                            1   1   1
+                            1   1   1
+                            1   1   1
+
+                    true([4 3])
+                        <logical>
+                            1   1   1
+                            1   1   1
+                            1   1   1
+                            1   1   1
+
+false           Return an array which all elements are logical 0 (false).
 
                 e.g.
                     false
-                        (logical) 0
+                        <logical>
+                            0
+
+                    false(3)
+                        <logical>
+                            0   0   0
+                            0   0   0
+                            0   0   0
+
+                    false(4, 3)
+                        <logical>
+                            0   0   0
+                            0   0   0
+                            0   0   0
+                            0   0   0
+
+                    false(4, 3, 2)
+                        <logical>
+                            0   0   0
+                            0   0   0
+                            0   0   0
+                            0   0   0
+
+                            0   0   0
+                            0   0   0
+                            0   0   0
+                            0   0   0
+
+                    false([4 3])
+                        <logical>
+                            0   0   0
+                            0   0   0
+                            0   0   0
+                            0   0   0
 
 --------------------
 
