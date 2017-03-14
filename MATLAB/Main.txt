@@ -142,8 +142,8 @@ Language Fundamentals
 https://www.mathworks.com/help/matlab/language-fundamentals.html
 ------------------------------------------------------------------------------------------------------------------------
 [X] Entering Commands
-[X] Matrices and Arrays                     The Topics section is not read.
-[>] Operators and Elementary Operations     The Topics section is not read.
+[X] Matrices and Arrays                     All the Topics sections are not read.
+[>] Operators and Elementary Operations     All the Topics sections are not read.
 [ ] Special Characters
 [ ] Data Types
 
@@ -909,6 +909,7 @@ Line Specification
   Arithmetic Operators/Operations (Addition, Subtraction, Multiplication, Division, Power, Rounding, etc.)
   Relational Operators/Operations (Various Value Comparisons)
   Logical Operators/Operations (Processing Boolean Conditions)
+  Set Operations (Processing Unions, Intersection, Set Membership, etc.)
 
   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   Arithmetic Operators/Operations (Addition, Subtraction, Multiplication, Division, Power, Rounding, etc.)
@@ -3629,13 +3630,9 @@ Line Specification
   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   Logical Operators/Operations (Processing Boolean Conditions)
 
-  XXXXX       | XXXXX      | XXXXX      | XXXXX      | XXXXX      | XXXXX      | XXXXX      | XXXXX      |      (?)
   ~ not       | & and      | | or       | xor        | && and (SC)| || or (SC) |                                (6)
   true        | false      | any        | all        | find       | islogical  | logical    |                   (7)
   Note: SC here means the operator employs the short-circuiting behavior.
-
-  XXX           XXXXX           XXXXX.
-
   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
   Operator      Function        Description
@@ -4813,6 +4810,33 @@ Line Specification
                                         1   1   0
                                         1   0   1
                                         0   1   1
+
+  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  Set Operations (Processing Unions, Intersection, Set Membership, etc.)
+
+  issorted    | ismember   | ismembertol| unique     | uniquetol  |                                             (5)
+  union       | intersect  | setdiff    | setxor     |                                                          (4)
+  join        | innerjoin  | outerjoin  |                                                                       (3)
+
+  XXXXX       | XXXXX      | XXXXX      | XXXXX      | XXXXX      | XXXXX      | XXXXX      | XXXXX      |      (?)
+  XXX           XXXXX           XXXXX.
+
+  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+  Operator      Function        Description
+  ------------------------------------------------------------------------------------------------------------------------
+  ----          issorted        Determine whether an array is sorted.
+  ----          ismember        Determine whether an array's elements are members of another array.
+  ----          ismembertol     Determine whether an array's elements are members of another array, within tolerance.
+  ----          unique          Determine unique array elements.
+  ----          uniquetol       Determine unique array elements, within tolerance.
+  ----          union           Set union of two arrays.
+  ----          intersect       Set intersection of two arrays.
+  ----          setdiff         Set difference of two arrays.
+  ----          setxor          Set exclusive OR of two arrays.
+  ----          join            Combine strings, or merge two tables/timetables.
+  ----          innerjoin       Perform inner join between two tables/timetables.
+  ----          outerjoin       Perform outer join between two tables/timetables.
 
 ========================================
 Function List
