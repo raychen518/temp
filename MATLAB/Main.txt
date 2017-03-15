@@ -4406,9 +4406,6 @@ Line Specification
                                     find(2)
                                         1
 
-                                    find('')
-                                        []
-
                                     find('a')
                                         1
 
@@ -4447,6 +4444,9 @@ Line Specification
                                         7
                                         8
                                         9
+
+                                    find('')
+                                        []
 
                                     data = [1 0 0; 0 5 0; 7 0 9]
                                         1   0   0
@@ -4678,10 +4678,6 @@ Line Specification
                                         <logical>
                                             0
 
-                                    islogical('')
-                                        <logical>
-                                            0
-
                                     islogical('a')
                                         <logical>
                                             0
@@ -4715,6 +4711,10 @@ Line Specification
                                     islogical(true(3, 4))
                                         <logical>
                                             1
+
+                                    islogical('')
+                                        <logical>
+                                            0
 
                                 e.g. Test others.
                                     islogical(1 > 2)
@@ -4834,7 +4834,381 @@ Line Specification
   ----          intersect       Set intersection of two arrays.
   ----          setdiff         Set difference of two arrays.
   ----          setxor          Set exclusive OR of two arrays.
+
   ----          join            Combine strings, or merge two tables/timetables.
+
+                                e.g. Join strings #1: Invalid and valid inputs.
+                                    data1 = 'abc'
+                                        abc
+
+                                    data2 = ['a' 'b' 'c']
+                                        abc
+
+                                    data3 = string('abc')
+                                        <string>
+                                            "abc"
+
+                                    data4 = {'a' 'b' 'c'}
+                                        <1x3 cell array>
+                                            'a' 'b' 'c'
+
+                                    isequal(data1, data2)
+                                        1
+
+                                    whos
+                                        Name       Size     Bytes  Class    Attributes
+                                        ------------------------------------------------------------
+                                        data1      1x3          6  char
+                                        data2      1x3          6  char
+                                        data3      1x1        134  string
+                                        data4      1x3        342  cell
+
+                                    join(data1)
+                                        <Error: First argument must be a string array or cell array of character vectors.>
+
+                                    join(data2)
+                                        <Error: First argument must be a string array or cell array of character vectors.>
+
+                                    join(data3)
+                                        <string>
+                                            "abc"
+
+                                    join(data4)
+                                        <string>
+                                            "a b c"
+
+                                e.g. Join strings #2: Normal uses and specifying dimensions.
+                                    data1 = [string('Nan') string('loves') string('Ting.')]
+                                        <1x3 string array>
+                                            "Nan"    "loves"    "Ting."
+
+                                    data2 = {'Nan' 'loves' 'Ting.'}
+                                        <1x3 cell array>
+                                            'Nan'    'loves'    'Ting.'
+
+                                    join(data1)
+                                        <string>
+                                            "Nan loves Ting."
+
+                                    join(data2)
+                                        <string>
+                                            "Nan loves Ting."
+
+                                    join(data1) == join(data2)
+                                        <logical>
+                                            1
+
+                                    ------------------------
+
+                                    data = {'A' 'B' 'C'};
+
+                                    join(data)
+                                        <string>
+                                            "A B C"
+
+                                    join(data')
+                                        <string>
+                                            "A B C"
+
+                                    join(data) == join(data')
+                                        <logical>
+                                            1
+
+                                    ------------------------
+
+                                    data = {'Michael', 'Jackson';
+                                            'Shania', 'Twain';
+                                            'John', 'Denver'}
+                                        <3x2 cell array>
+                                            'Michael'    'Jackson'
+                                            'Shania'     'Twain'
+                                            'John'       'Denver'
+
+                                    join(data)
+                                        <3x1 string array>
+                                            "Michael Jackson"
+                                            "Shania Twain"
+                                            "John Denver"
+
+                                    join(data, 1)
+                                        <1x2 string array>
+                                            "Michael Shania John"    "Jackson Twain Denver"
+
+                                    join(data, 2)
+                                        <3x1 string array>
+                                            "Michael Jackson"
+                                            "Shania Twain"
+                                            "John Denver"
+
+                                    isequal(join(data, 2), join(data))
+                                        <logical>
+                                            1
+
+                                e.g. Join strings #3: Using delimiters.
+                                    data = {'ABC' 'DEF' 'GHI'}
+                                        <1x3 cell array>
+                                            'ABC'    'DEF'    'GHI'
+
+                                    join(data)
+                                        <string>
+                                            "ABC DEF GHI"
+
+                                    join(data, ',')
+                                        <string>
+                                            "ABC,DEF,GHI"
+
+                                    join(data, ', ')
+                                        <string>
+                                            "ABC, DEF, GHI"
+
+                                    join(data, ' | ')
+                                        <string>
+                                            "ABC | DEF | GHI"
+
+                                    string('(') + join(data, ') (') + string(')')
+                                        <string>
+                                            "(ABC) (DEF) (GHI)"
+
+                                    ------------------------
+
+                                    data = {'X' 'Y' 'Z'}
+                                        <1x3 cell array>
+                                            'X'    'Y'    'Z'
+
+                                    join(data, {' + ', ' = '})
+                                        <string>
+                                            "X + Y = Z"
+
+                                    ------------------------
+
+                                    data = {'X' 'Y' 'Z';
+                                            'A' 'B' 'C';
+                                            'I' 'J' 'K'}
+                                        <3x3 cell array>
+                                            'X'    'Y'    'Z'
+                                            'A'    'B'    'C'
+                                            'I'    'J'    'K'
+
+                                    join(data)
+                                        <3x1 string array>
+                                            "X Y Z"
+                                            "A B C"
+                                            "I J K"
+
+                                    delimiters = {' + ', ' = '; ' - ', ' = '; ' * ', ' = '}
+                                        <3x2 cell array>
+                                            ' + '    ' = '
+                                            ' - '    ' = '
+                                            ' * '    ' = '
+
+                                    join(data, delimiters)
+                                        <3x1 string array>
+                                            "X + Y = Z"
+                                            "A - B = C"
+                                            "I * J = K"
+
+                                    delimitersAdjusted = rot90(delimiters, 3)
+                                        <2x3 cell array>
+                                            ' * '    ' - '    ' + '
+                                            ' = '    ' = '    ' = '
+
+                                    join(data, delimitersAdjusted, 1)
+                                        <1x3 string array>
+                                            "X * A = I"    "Y - B = J"    "Z + C = K"
+
+                                e.g. Join tables/timetables #1: Normal joins (Employees and Managers).
+                                    employees = table({'Jack', 'Mary', 'Tom', 'Lisa', 'Peter'}',...
+                                                      {'DEV', 'HR', 'DEV', 'QA', 'HR'}',...
+                                                      [29, 35, 24, 22, 30]',...
+                                                      'VariableNames', {'Employee', 'Department', 'Age'})
+                                        Employee    Department    Age
+                                        --------    ----------    ---
+                                        'Jack'      'DEV'         29
+                                        'Mary'      'HR'          35
+                                        'Tom'       'DEV'         24
+                                        'Lisa'      'QA'          22
+                                        'Peter'     'HR'          30
+
+                                    managers = table({'DEV', 'HR', 'QA'}',...
+                                                     {'David', 'Susan', 'Catherine'}',...
+                                                     'VariableNames', {'Department', 'Manager'})
+                                        Department  Manager
+                                        ----------  -----------
+                                        'DEV'       'David'
+                                        'HR'        'Susan'
+                                        'QA'        'Catherine'
+
+                                    % The only common variable "Department" is used as the key variable
+                                    % to join the "employees" and "managers" tables.
+                                    join(employees, managers)
+                                        Employee    Department    Age   Manager
+                                        --------    ----------    ---   -----------
+                                        'Jack'      'DEV'         29    'David'
+                                        'Mary'      'HR'          35    'Susan'
+                                        'Tom'       'DEV'         24    'David'
+                                        'Lisa'      'QA'          22    'Catherine'
+                                        'Peter'     'HR'          30    'Susan'
+
+                                e.g. Join tables/timetables #2: Joins ignoring unnecessary information (Food Information).
+                                    favoriteFood = table([29, 35, 24, 22, 30]',...
+                                                         {'Cereal', 'Pizza', 'Salmon', 'Cookie', 'Pizza'}',...
+                                                         'VariableNames', {'Age', 'Food'},...
+                                                         'RowNames', {'Jack', 'Mary', 'Tom', 'Lisa', 'Peter'}')
+                                                    Age     Food
+                                                    ---     --------
+                                         Jack       29      'Cereal'
+                                         Mary       35      'Pizza'
+                                         Tom        24      'Salmon'
+                                         Lisa       22      'Cookie'
+                                         Peter      30      'Pizza'
+
+                                    foodInfo = table({'Cereal', 'Pizza', 'Salmon', 'Cookie', 'Cake'}',...
+                                                     [110, 160, 140, 367, 243]',...
+                                                     {'B', 'D', 'B-', 'A', 'C-'}',...
+                                                     'VariableNames', {'Food', 'Calories', 'NutritionGrade'})
+                                        Food        Calories    NutritionGrade
+                                        --------    --------    --------------
+                                        'Cereal'    110         'B'
+                                        'Pizza'     160         'D'
+                                        'Salmon'    140         'B-'
+                                        'Cookie'    367         'A'
+                                        'Cake'      243         'C-'
+
+                                    % Note: The information about the food "cake" is not displayed
+                                    %       since the food "cake" has no corresponding entry in the "favoriteFood" table.
+                                    join(favoriteFood, foodInfo)
+                                                    Age     Food        Calories    NutritionGrade
+                                                    ---     --------    --------    --------
+                                         Jack       29      'Cereal'    110         'B'
+                                         Mary       35      'Pizza'     160         'D'
+                                         Tom        24      'Salmon'    140         'B-'
+                                         Lisa       22      'Cookie'    367         'A'
+                                         Peter      30      'Pizza'     160         'D'
+
+                                e.g. Join tables/timetables #3: Joins specifying the key variables.
+                                    table1 = table([11, 13, 15, 17, 19]',...
+                                                   [12, 14, 16, 18, 20]',...
+                                                   {'abc', 'def', 'ghi', 'jkl', 'mno'}',...
+                                                   'VariableNames', {'VAR1', 'VAR2', 'VAR31'})
+                                        VAR1    VAR2    VAR31
+                                        ----    ----    -----
+                                        11      12      'abc'
+                                        13      14      'def'
+                                        15      16      'ghi'
+                                        17      18      'jkl'
+                                        19      20      'mno'
+
+                                    table2 = table([11, 13, 15, 18, 19]',...
+                                                   [12, 14, 16, 18, 20]',...
+                                                   [true, false, true, false, true]',...
+                                                   'VariableNames', {'VAR1', 'VAR2', 'VAR32'})
+                                        VAR1    VAR2    VAR32
+                                        ----    ----    -----
+                                        11      12      true
+                                        13      14      false
+                                        15      16      true
+                                        18      18      false
+                                        19      20      true
+
+                                    join(table1, table2)
+                                        <Error: The key variables for B must contain all unique combinations of values in the key variables for A.>
+
+                                    join(table1, table2, 'Keys', 'VAR2')
+                                        VAR1-table1    VAR2    VAR31    VAR1-table2    VAR32
+                                        -----------    ----    -----    -----------    -----
+                                        11             12      'abc'    11             true
+                                        13             14      'def'    13             false
+                                        15             16      'ghi'    15             true
+                                        17             18      'jkl'    18             false
+                                        19             20      'mno'    19             true
+
+                                    % Keep only one copy of non-key variables by using the "KeepOneCopy" property.
+                                    join(table1, table2, 'Keys', 'VAR2', 'KeepOneCopy','VAR1')
+                                        VAR1    VAR2    VAR31    VAR32
+                                        ----    ----    -----    -----
+                                        11      12      'abc'    true
+                                        13      14      'def'    false
+                                        15      16      'ghi'    true
+                                        17      18      'jkl'    false
+                                        19      20      'mno'    true
+
+                                e.g. Join tables/timetables #4: Joins specifying the key variables (respectively of both tables).
+                                    table1 = table([10 4 2 3 7]', [5 4 9 6 1]', [10 3 8 8 4]')
+                                        Var1    Var2    Var3
+                                        ----    ----    ----
+                                        10      5       10
+                                         4      4        3
+                                         2      9        8
+                                         3      6        8
+                                         7      1        4
+
+                                    table2 = table([6 1 1 6 8]', [2 3 4 7 10]')
+                                        Var1    Var2
+                                        ----    ----
+                                        6        2
+                                        1        3
+                                        1        4
+                                        6        7
+                                        8       10
+
+                                    MC: The "Var1" values in the "table1" table are same as
+                                        the "Var2" values in the "table2" table, except for order.
+
+                                    [table3, rowOrderInTable2] = join(table1, table2, 'LeftKeys', 1, 'RightKeys', 2)
+                                        table3 =
+                                            Var1-table1    Var2    Var3    Var1-table2
+                                            -----------    ----    ----    -----------
+                                            10             5       10      8
+                                             4             4        3      1
+                                             2             9        8      6
+                                             3             6        8      1
+                                             7             1        4      6
+
+                                        rowOrderInTable2 =
+                                             5
+                                             3
+                                             1
+                                             2
+                                             4
+
+                                e.g. Join tables/timetables #5: Joins using the row names (Physical Examination).
+                                    physicalExam1 = table({'Male', 'Female', 'Male', 'Female', 'Male'}',...
+                                                          [29, 35, 24, 22, 30]',...
+                                                          'VariableNames', {'Gender', 'Age'},...
+                                                          'RowNames', {'Jack', 'Mary', 'Tom', 'Lisa', 'Peter'}')
+                                                    Gender      Age
+                                                    --------    ---
+                                        Jack        'Male'      29
+                                        Mary        'Female'    35
+                                        Tom         'Male'      24
+                                        Lisa        'Female'    22
+                                        Peter       'Male'      30
+
+                                    physicalExam2 = table([175, 158, 166, 172, 170]',...
+                                                          [89.5, 49.7, 75.8, 54.1, 65.2]',...
+                                                          [122 80; 109 77; 117 75; 124 93; 125 83],...
+                                                          'VariableNames', {'Height', 'Weight', 'BloodPressure'},...
+                                                          'RowNames', {'Jack', 'Mary', 'Tom', 'Lisa', 'Peter'}')
+                                                    Height    Weight    BloodPressure
+                                                    ------    ------    -------------
+                                        Jack        175       89.5      122     80
+                                        Mary        158       49.7      109     77
+                                        Tom         166       75.8      117     75
+                                        Lisa        172       54.1      124     93
+                                        Peter       170       65.2      125     83
+
+                                    join(physicalExam1, physicalExam2)
+                                        <Error: Cannot find a common table variable to use as a key variable.>
+
+                                    join(physicalExam1, physicalExam2, 'Keys', 'RowNames')
+                                                    Gender     Age    Height    Weight    BloodPressure
+                                                    --------   ---    ------    ------    -------------
+                                        Jack        'Male'     29     175       89.5      122     80
+                                        Mary        'Female'   35     158       49.7      109     77
+                                        Tom         'Male'     24     166       75.8      117     75
+                                        Lisa        'Female'   22     172       54.1      124     93
+                                        Peter       'Male'     30     170       65.2      125     83
+
   ----          innerjoin       Perform inner join between two tables/timetables.
   ----          outerjoin       Perform outer join between two tables/timetables.
 
