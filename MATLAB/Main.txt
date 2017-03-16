@@ -51,6 +51,11 @@ Study Notes (at MathWorks)
 Function List
 Code Snippets
 Toolbox - Psychtoolbox
+    Overview
+    Information for Beginners
+    Misc
+        Updating Psychtoolbox
+    Study Notes
 References
     MATLAB - MathWorks
     MATLAB - Wikipedia
@@ -75,7 +80,9 @@ Xxxxx Xxxxx Xxxxx
 ============================================================
 --------------------------------------------------------------------------------
 
-Note: Unless otherwise specified, all content is based on MATLAB R2016b.
+Notes: Unless otherwise specified, all content in this document is based on the following software versions.
+       - MATLAB R2016b
+       - Psychtoolbox 3.0.14 (30 December 2016)
 
 ========================================
 Overview
@@ -6782,21 +6789,17 @@ Code Snippets
 ========================================
 Toolbox - Psychtoolbox
 ========================================
-Psychtoolbox for MATLAB - Wikipedia
-https://en.wikipedia.org/wiki/Psychtoolbox_for_MATLAB
-
-Psychtoolbox
-http://psychtoolbox.org/
-
 Overview
 Information for Beginners
 Misc
     Updating Psychtoolbox
+Study Notes
 
 ============================================================
 Overview
 ============================================================
 - Psychtoolbox is a set of MATLAB and GNU Octave functions for vision research.
+  It provides exquisite control of the computer to test observers with research-grade dynamic stimuli.
 - Psychtoolbox interfaces between MATLAB/Octave and the computer hardware.
 - Psychtoolbox is free.
 - By far (2017/02), Psychophysics Toolbox Version 3 (PTB-3) is the latest version of Psychtoolbox, while Psychophysics Toolbox Version 2 (PTB-2) becomes deprecated.
@@ -6821,11 +6824,28 @@ Information for Beginners
 ============================================================
 - Try the command "help Psychtoolbox".  (to list all the categories of functions in Psychtoolbox)
 - Try the command "help PsychDemos".    (to list all the demos in Psychtoolbox)
+- Try the command "help PsychBasic".    (to list all functions in PsychBasic)
+
 - Be sure to read the document "{Psychtoolbox Home}/Psychtoolbox/PsychDocumentation/Psychtoolbox3-Slides.pdf"
   for an overview of differences between PTB-3 and PTB-2, and proper use of basic features.
 - Be sure to read other documents in the folder "{Psychtoolbox Home}/Psychtoolbox/PsychDocumentation".
+  The following information is included.
+  - Technical implementation details
+  - How to solve specific tasks
+  - How to troubleshoot common problems
 - Be sure to get familiar with demos in the folder "{Psychtoolbox Home}/PsychDemos".
   Those demos show best practices for many common tasks and are generally well documented.
+- A large set of nice and beginner friendly Psychtoolbox tutorial scripts written by Peter Scarfe
+  can be found at http://peterscarfe.com/ptbtutorials.html.
+
+- In Psychtoolbox's documentation, optional function arguments are embraced with square brackets.
+- The most important and generally useful functions (especially Screen), are in PsychBasic.
+
+- To acknowledge use of Psychtoolbox when publishing the research,
+  say something in the research like follows.
+  ------------------------------------------------------------------------------
+  I wrote the experiments in Matlab, using the Psychophysics Toolbox extensions ...
+  ------------------------------------------------------------------------------
 
 ============================================================
 Misc
@@ -6835,6 +6855,210 @@ Updating Psychtoolbox
 Updating Psychtoolbox
     To update Psychtoolbox to the latest version, use the following MATLAB command.
         UpdatePsychtoolbox
+
+============================================================
+Study Notes
+============================================================
+Contents
+Demos
+
+Contents
+    Here are Psychtoolbox folders and their contents.
+    <from the command "help Psychtoolbox">
+    Folder                      Description                                                     Description (Chinese)
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    PsychAlpha                  - Under development. Experimental, risky, undocumented.         OpenGL阿尔法通道用函数（开发中、属于试验性的、使用上有风险、未提供文档）。
+    PsychAlphaBlending          - OpenGL alpha-channel blending utilities and constants.        OpenGL阿尔法通道混合用的实用程序和常量。
+!   PsychBasic                  - Basic support routines for psychophysics.                     基本的支持函数。
+    PsychCal                    - Calibrate your video monitors.                                用于校准视频监视器的函数。
+    PsychCalDemoData            - Demo calibration data.                                        校准数据的演示。
+    PsychColorimetric           - Colorimetric calculations.                                    用于比色计算的函数。
+    PsychColorimetricData       - Standard colorimetric data.                                   标准的比色数据。
+    PsychContributed            - Contributed programs.                                         （第三方）贡献的程序。
+!   PsychDemos                  - Show how to use the Psychtoolbox.                             如何使用Psychtoolbox的演示。
+!   PsychDocumentation          - Documentation about specific topics.                          特定主题的文档。
+    PsychFiles                  - Process text files.                                           用于处理文本文件的函数。
+    PsychGamma                  - Fit monitor gamma functions.                                  用于安装监视器伽玛功能的函数。
+    PsychGLImageProcessing      - Built-in image processing via graphics hardware.              内建的通过图形硬件进行图形处理的函数。
+    PsychGPGPU                  - General purpose accelerated computing on GPUs.                通用的GPU加速计算用的函数。
+    PsychHardware               - Interface to plug-in hardware.                                插件式硬件的接口函数。
+    PsychInitialize             - Initialize and deinitialize MATLAB                            用于初始化和反初始化MATLAB的函数。
+    PsychMatlabTests            - Document the few bugs in Matlab 5.2.1.                        关于MATLAB 5.2.1的一些代码错误的记载。
+    PsychObsolete               - Obsolete routines, still present for compatibility.           废弃的函数（但为了兼容性还是保留了）。
+    PsychOpenGL                 - Routines for low-level access to OpenGL 3D graphics.          用于OpenGL 3D图形的底层访问的函数。
+    Psychometric                - Psychometric function fitting.                                用于安装心理测量功能的函数。
+    PsychOneliners              - Trivial, but handy, functions.                                不重要但是便利的函数。
+    PsychOptics                 - Optics calculations, mostly for human optics.                 用于光学计算（主要是人体光学）的函数。
+    PsychPriority               - Priority and Rush.  (formerly within PsychBasic)              用于控制程序运行的优先级别的函数。（之前放置在PsychBasic目录下）
+    PsychProbability            - Probability and statistics.                                   用于进行概率和统计运算的函数。
+    PsychRadiometric            - Radiometric/photometric calculations and conversions.         用于进行辐射测量和光度测量的计算和转换的函数。
+!   PsychRects                  - Manipulate rectangles for drawing.                            用于操作矩形进行图形绘制的函数。
+    PsychSignal                 - Signal processing and math routines.                          用于信号处理和数学的函数。
+    PsychStairCase              - Adaptive staircase procedure.                                 自适应的阶梯程序。
+    PsychTests                  - Evaluate performance of software and hardware.                用于评估软硬件性能的函数。
+    PsychVideoCapture           - Functions for realtime video capture.                         用于实时视频采集的函数。
+    Quest                       - Threshold estimation procedure.                               用于阈值估计的函数。
+                                                                                                注：
+                                                                                                - OpenGL (Open Graphics Library, 开放图形库), 是一个用于绘制2D/3D图形的、跨编程语言、跨平台的 API (应用程序编程接口)。
+                                                                                                - GPU (Graphics Processing Unit, 图形处理器), 是一种专门进行绘图运算工作的微处理器。
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Demos
+    Here are demos of Psychtoolbox (located in the PsychDemos folder).
+    <from the command "help PsychDemos">
+    Demo                        Description                                                     Description (Chinese)
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+!   PsychExampleExperiments     - Subfolder with real experiment scripts for                    由用户提供的、使用在不同任务中的、真实的实验脚本。
+                                  different tasks, contributed by users.
+
+    AlphaImageDemo              - Simple demo of OpenGL alpha blending.                         关于OpenGL阿尔法混合的简单演示。
+    AlphaRotateDemo             - A variant of AlphaImageDemoOSX, demonstrates rotated drawing. 关于绘图旋转的演示（本演示是之上演示的变体）。
+    ArcDemo                     - Demonstrate the 'FrameArc', 'FillArc' functions.              关于“FrameArc”和“FillArc”功能（这2个功能都是有关弧的绘制）的演示。
+    AudioTunnel3DDemo           - Very sketchy demo on how to use OpenAL for 3D spatialized sound.
+                                                                                                关于使用OpenAL产生3D空间化声音的非常粗略的演示（1）。
+    AudioTunnel3DDemo2          - Another sketchy demo on how to use OpenAL for 3D spatialized sound.
+                                                                                                关于使用OpenAL产生3D空间化声音的非常粗略的演示（2）。
+    BasicAMAndMixScheduleDemo   - Demonstrates basic use of sound schedules, volume controls,   关于声音计划、音量控制、振幅调制（调幅）、多个语音的音频混合的基本用法的演示。
+                                  amplitude modulation and audio mixing of multiple voices.
+    BasicSoundFeedbackDemo      - Demonstrates a audio feedback loop via PsychPortAudio().      关于通过PsychPortAudio函数产生一个音频反馈回路的演示。参照“DelayedSoundFeedbackDemo”演示来了解一个更具研究级别的方案。
+                                  See DelayedSoundFeedbackDemo for a more research grade approach.
+    BasicSoundInputDemo         - Demonstrate basic usage of PsychPortAudio() for sound capture.
+                                                                                                关于使用PsychPortAudio函数采集声音的基本用法的演示。
+    BasicSoundOutputDemo        - Demonstrate basic usage of PsychPortAudio() for sound playback.
+                                                                                                关于使用PsychPortAudio函数回放声音的基本用法的演示。
+    BasicSoundScheduleDemo      - Demonstrate basic usage of sound schedules and buffers with PsychPortAudio().
+                                                                                                关于使用PsychPortAudio函数处理声音计划和缓冲的演示。
+    BlurredMipmapDemo           - Apply blurring via OpenGL mip-mapping to live video or movies.
+                                                                                                关于对直播视频或电影进行模糊化处理（通过OpenGL mip-mapping）的演示。
+    BlurredVideoCaptureDemo     - Demonstrate application of GPU accelerated image filters to live video.
+                                                                                                关于在直播视频上应用GPU加速图像过滤器的演示。
+    BubbleDemo                  - Like GazeContingentDemoOSX, but with multiple apertures.      本演示和“GazeContingentDemo”演示一样，除了有多个光圈／孔径。
+    CalDemo                     - Demonstrate use of calibration structure and associated routines.
+                                                                                                关于使用校准结构和关联函数的演示。
+    ClutAnimDemo                - Demonstrate lookup table animation.                           关于查找表动画的演示。
+    ContrastModulatedNoiseTheClumsyStyleDemo
+                                - Demonstrate creation of contrast modulated noise.             关于创建对比调制噪声的演示（该方式笨拙且低效，但在老的硬件上能生效）。
+                                  Clumsy and inefficient, but works on old hardware.
+    ContrastModulatedNoiseTheElegantStyleDemo
+                                - Demonstrate creation of contrast modulated noise.             关于创建对比调制噪声的演示（该方式优雅且高效，但只在较新的硬件上生效）。
+                                  Elegant and efficient, but needs recent hardware.
+
+    DatarecordingFromISCANDemo  - Template for asynchronous data collection and timestamping of gaze samples from ISCAN eye tracker.
+                                                                                                关于异步数据采集和凝视样本时间戳的演示。
+    DatarecordingFromSerialPortDemo
+                                - Template for asynchronous data collection and timestamping from serial port.
+                                                                                                关于XXXXX的演示。
+    DelayedSoundFeedbackDemo    - Demonstrates a audio feedback loop via PsychPortAudio() with exactly controlled latency.
+                                                                                                关于XXXXX的演示。
+    DotDemo                     - Animate dots with Screen('DrawDots).                          关于XXXXX的演示。
+    DKLDemo                     - Demonstrate DKL color space.                                  关于XXXXX的演示。
+    DrawFormattedTextDemo       - Demonstrate formatted text drawing via DrawFormattedText().   关于XXXXX的演示。
+    DrawHighQualityUnicodeTextDemo
+                                - Demonstrate drawing of high quality, anti-aliased and Unicode text.
+                                                                                                关于XXXXX的演示。
+    DrawManuallyAntiAliasedTextDemo
+                                - Manually anti-alias text for special purpose applications.    关于XXXXX的演示。
+    DrawMirroredTextDemo        - Shows how to draw horizontally mirrored text.                 关于XXXXX的演示。
+    DrawSomeTextDemo            - Very simple example of using 'DrawText'.                      关于XXXXX的演示。
+    DriftDemo                   - Animation of grating using textures.                          关于XXXXX的演示。
+    DriftDemo2                  - More efficient animation of gratings using one texture.       关于XXXXX的演示。
+    DriftDemo3                  - Even more efficient animation of gratings under some constraints.
+                                                                                                关于XXXXX的演示。
+    DriftDemo4                  - Very efficient animation of gratings on graphics hardware with shader support.
+                                                                                                关于XXXXX的演示。
+    DriftDemo5                  - Animation of dual -gratings via use of alpha blending and color masking.
+                                                                                                关于XXXXX的演示。
+    DriftDemo6                  - Very efficient animation of dual-gratings on graphics hardware with shader support.
+                                                                                                关于XXXXX的演示。
+    DriftWaitDemo               - Show how to optimally time animations.                        关于XXXXX的演示。
+    ErrorCatchDemo              - How to handle errors gracefully (try/catch).                  关于XXXXX的演示。
+    ExpandingRingsDemo          - Shows how GLSL procedural textures can be used to             关于XXXXX的演示。
+                                  create some expanding rings stimulus.                         
+    FastNoiseDemo               - Demo and benchmark on how to quickly draw noise stimuli.      关于XXXXX的演示。
+    FastMaskedNoiseDemo         - Like FastNoiseDemo, but the noise patch is                    关于XXXXX的演示。
+                                  drawn through an aperture to demonstrate fast masking.        
+    FitGammaDemo                - Demonstrate gamma fitting routine FitGamma.                   关于XXXXX的演示。
+    FontDemo                    - How to check for font availability and set font.              关于XXXXX的演示。
+    GarboriumDemo               - Demonstrate superimposed drawing of many Gabors by use of alpha-blending, 'DrawTextures' batch drawing and PTB imaging pipeline.
+                                                                                                关于XXXXX的演示。
+    GazeContingentDemo          - Implementation of a simple gaze contingent display            关于XXXXX的演示。
+    GLSLCLUTAnimDemo            - Demonstrates use of function moglClutBlit to                  关于XXXXX的演示。
+                                  perform CLUT animation with GLSL in an OS independent way.
+    GPGPUDemos                  - Demos for use of GPGPU computing with Psychtoolbox.           关于XXXXX的演示。
+    GratingDemo                 - Basic display of a grating on the screen.                     关于XXXXX的演示。
+    IsomerizationsInDishDemo    - Compute photoreceptor isomerizations for retina in a dish.    关于XXXXX的演示。
+    IsomerizationsInEyeDemo     - Compute photoreceptor isomerizations for human eye.           关于XXXXX的演示。
+    KbDemo                      - Demonstrate KbCheck, KbName, KbWait.                          关于XXXXX的演示。
+    KinectDemo                  - Capture and display video and depths data from a Kinect box.  关于XXXXX的演示。
+    Kinect3DDemo                - Capture data from a Kinect box and view it as a textured 3D point-cloud or mesh.
+                                                                                                关于XXXXX的演示。
+    LineStippleDemo             - Draw dotted and dashed lines.                                 关于XXXXX的演示。
+    MandelbrotDemo              - Visualize the Mandelbrot fractal set by use of a GLSL procedural texture.
+                                                                                                关于XXXXX的演示。
+    MouseTraceDemo              - Track mouse around screen and draw contour.                   关于XXXXX的演示。
+    MouseTraceDemo2             - More efficient tracking of mouse around screen drawing contour.
+                                                                                                关于XXXXX的演示。
+    MouseTraceDemo3             - Like MouseTraceDemo2, but faster, and for multiple mice.      关于XXXXX的演示。
+    MouseTraceDemo4             - Like MouseTraceDemo2, but faster on modern hardware.          关于XXXXX的演示。
+    MovieDemo                   - Animation without offscreen windows.                          关于XXXXX的演示。
+    MovieDemos                  - Subfolder: Demos on how to use movie playback.                关于XXXXX的演示。
+    MovingLineDemo              - Shows some horizontally moving lines to demonstrate flat panel display artifacts.
+                                                                                                关于XXXXX的演示。
+    NomogramDemo                - Compute photoreceptor nomograms.                              关于XXXXX的演示。
+    OldNewRecogExp              - A full old-new recognition experiment.                        关于XXXXX的演示。
+    OpenGL4MatlabDemos          - Subfolder: Demos on how to use MOGL OpenGL functions.         关于XXXXX的演示。
+    PanelFitterDemo             - Demonstrate use of the builtin panel fitter.                  关于XXXXX的演示。
+    ProceduralGaborDemo         - Demo for fast drawing of Gabors via procedural textures.      关于XXXXX的演示。
+    ProceduralGarboriumDemo     - Same as GarboriumDemo, just with procedural gabor drawing.    关于XXXXX的演示。
+    ProceduralNoiseDemo         - Demo for fast drawing of noise patches via procedural texturing.
+                                                                                                关于XXXXX的演示。
+    PsychRTBoxDemo              - Demonstrates basic use of the RTBox reaction time button response box.
+                                                                                                关于XXXXX的演示。
+    RaspberryPiGPIODemo         - Show basic use of GPIO's on a RaspberryPi running Raspian GNU/Linux.
+                                                                                                关于XXXXX的演示。
+    ReceivingTriggerFromSerialPortDemo
+                                - Template for asynchronous trigger collection and timestamping from serial port.
+                                                                                                关于XXXXX的演示。
+    RenderDemo                  - Render CIE xyY as a color patch.                              关于XXXXX的演示。
+    SadowskiDemo                - Shows the "Sadowski" color afterimage effect.                 关于XXXXX的演示。
+    SimpleImageMixingDemo       - Shows how to mix two images via alpha-blending, using an alpha-mask which itself is morphed between two masks.
+                                  See also ImageMixingTutorial for a more complex demonstration of the technique.
+                                                                                                关于XXXXX的演示。
+    SimpleSoundScheduleDemo     - Simple demo for basic use of sound schedules with PsychPortAudio.
+                                                                                                关于XXXXX的演示。
+    SimpleVoiceTriggerDemo      - demo of a simple voice trigger with PsychPortAudio.           关于XXXXX的演示。
+    SpriteDemo                  - Animates an image that follows the mouse.                     关于XXXXX的演示。
+    StereoDemo                  - Drive stereo-displays e.g., CrystalEyes.                      关于XXXXX的演示。
+    StereoViewer                - A simple viewer for stereo image pairs.                       关于XXXXX的演示。
+    TurnTableDemo               - Nurture your inner DJ! Some demo of advanced PsychPortAudio use and PowerMate use.
+                                                                                                关于XXXXX的演示。
+    ValetonVanNorrenDemo        - Exercise our code that implements the V-VN (1983) cone adaptation model.
+                                                                                                关于XXXXX的演示。
+    VideoCaptureDemo            - Simple demo for video capture functions.                      关于XXXXX的演示。
+    VideoCaptureToMatlabDemo    - demo of returning live captured video to Octave or matlab as image matrices.
+                                                                                                关于XXXXX的演示。
+    VideoDelayLoopMiniDemo      - Delayed visual feedback with controllable delay.              关于XXXXX的演示。
+    VideoDVCamCaptureDemo       - Demonstrate video capture and recording from DV consumer cameras.
+                                                                                                关于XXXXX的演示。
+    VideoIPWebcamCaptureDemo    - demo video capture from an Android device via the Android IPWebcam app.
+                                                                                                关于XXXXX的演示。
+    VideoMultiCameraCaptureDemo - demo of time-synchronized high-perf capture and recording from multiple firewire cameras on Linux and OSX.
+                                                                                                关于XXXXX的演示。
+    VideoOfflineCaptureDemo     - capture video into internal memory, then return it after stop of capture.
+                                                                                                关于XXXXX的演示。
+    VideoRecordingDemo          - record captured video to movie files, possibly with audio.    关于XXXXX的演示。
+    VideoTextureExtractionDemo  - Use video capture + some computer based tracking to extract textures of objects in video.
+                                                                                                关于XXXXX的演示。
+    VignettingCorrectionDemo    - Demonstrate how to do display devignetting aka per-pixel gain correction.
+                                                                                                关于XXXXX的演示。
+    VRHMDDemo                   - Demonstrate how to use a Virtual reality head mounted display in the most basic way.
+                                                                                                关于XXXXX的演示。
+                                                                                                注：
+                                                                                                - OpenAL (Open Audio Library, 开放音频库), 是一个跨平台的音效API (应用程序编程接口)。
+    ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
 
 ========================================
 References
