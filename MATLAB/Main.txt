@@ -4857,6 +4857,8 @@ Line Specification
   ----          join            Combine strings, or merge two tables/timetables.
 
                                 e.g. Join strings #1: Invalid and valid inputs.
+                                    % When joining strings, the target should be a string array or cell array of character vectors.
+
                                     data1 = 'abc'
                                         abc
 
@@ -5259,7 +5261,7 @@ Line Specification
                                         4 hr    0.7          2      0.94
                                         5 hr    0.9        2.3      0.86
 
-                                e.g. Join tables/timetables #6: Joins tables and timetables (Measurement Data).
+                                e.g. Join tables/timetables #7: Joins tables and timetables (Measurement Data).
                                     measurements = [0.13 0.22 0.31 0.42 0.53 0.57 0.67 0.81 0.90 1.00]';
                                     devices = ['A' 'B' 'B' 'C' 'A' 'C' 'B' 'A' 'A' 'C']';
                                     measurementTable = timetable(seconds(1:10)', measurements, devices, 'VariableNames', {'Measurement', 'Device'})
@@ -5300,8 +5302,364 @@ Line Specification
                                          9 sec     0.9           A         0.023
                                         10 sec       1           C         0.012
 
-  ----          innerjoin       Perform inner join between two tables/timetables.
-  ----          outerjoin       Perform outer join between two tables/timetables.
+  ----          innerjoin       Perform inner join between two tables/timetables and return the result.
+
+                                The result is the inner join between the two tables/timetables, by matching up rows using all the variables with the same name as key variables (or the specified key variables).
+                                The result retains only rows existing in both tables/timetables.
+
+                                e.g. Perform a normal inner join.
+                                    tableA = table([1 2 3 4 5]',...
+                                                   {'B' 'C' 'A' 'G' 'D'}',...
+                                                   'VariableNames', {'VAR_1', 'VAR_2'})
+                                        VAR-1    VAR-2
+                                        -----    -----
+                                        1        'B'
+                                        2        'C'
+                                        3        'A'
+                                        4        'G'
+                                        5        'D'
+
+                                    tableB = table({'A' 'B' 'C' 'D' 'E' 'F'}',...
+                                                   [true, false, true, true, false, true]',...
+                                                   [5.23, 7.49, 3.16, 4.83, 2.94, 9.71]',...
+                                                   'VariableNames', {'VAR_2', 'VAR_3', 'VAR_4'})
+                                        VAR-2    VAR-3    VAR-4
+                                        -----    -----    -----
+                                        'A'      true     5.23
+                                        'B'      false    7.49
+                                        'C'      true     3.16
+                                        'D'      true     4.83
+                                        'E'      false    2.94
+                                        'F'      true     9.71
+
+                                    innerjoin(tableA, tableB)
+                                        % - The result's content is sorted by VAR-2 values in tableB.
+                                        % - The row having the VAR-2 value of 'G' in the tableA and
+                                        %   the rows having the VAR-2 value of 'E'/'F' in tableB
+                                        %   are not included in the result because they are not part of the inner join.
+                                        VAR-1    VAR-2    VAR-3    VAR-4
+                                        -----    -----    -----    -----
+                                        3        'A'      true     5.23
+                                        1        'B'      false    7.49
+                                        2        'C'      true     3.16
+                                        5        'D'      true     4.83
+
+                                    --------------------------------------------
+
+                                    % Try to see what happens if performing a join.
+                                    % An error occurs telling tableB is missing some values related to tableA (it is the VAR-2 value 'G').
+                                    join(tableA, tableB)
+                                        <Error: The key variable for B must contain all values in the key variable for A.>
+
+                                    % Change tableB to enable the join.
+                                    tableB = table({'A' 'B' 'C' 'D' 'E' 'F' 'G'}',...
+                                                   [true, false, true, true, false, true, false]',...
+                                                   [5.23, 7.49, 3.16, 4.83, 2.94, 9.71, 6.58]',...
+                                                   'VariableNames', {'VAR_2', 'VAR_3', 'VAR_4'})
+                                        VAR-2    VAR-3    VAR-4
+                                        -----    -----    -----
+                                        'A'      true     5.23
+                                        'B'      false    7.49
+                                        'C'      true     3.16
+                                        'D'      true     4.83
+                                        'E'      false    2.94
+                                        'F'      true     9.71
+                                        'G'      false    6.58
+
+                                    join(tableA, tableB)
+                                        VAR_1    VAR_2    VAR_3    VAR_4
+                                        -----    -----    -----    -----
+                                        1        'B'      false    7.49
+                                        2        'C'      true     3.16
+                                        3        'A'      true     5.23
+                                        4        'G'      false    6.58
+                                        5        'D'      true     4.83
+
+                                    --------------------------------------------
+
+                                    % Get row indexes in tableA and tableB, together with the inner join result.
+                                    [result, rowIndexesA, rowIndexesB] = innerjoin(tableA, tableB)
+                                        result =
+                                            VAR-1    VAR-2    VAR-3    VAR-4
+                                            -----    -----    -----    -----
+                                            3        'A'      true     5.23
+                                            1        'B'      false    7.49
+                                            2        'C'      true     3.16
+                                            5        'D'      true     4.83
+
+                                        rowIndexesA =
+                                            3
+                                            1
+                                            2
+                                            5
+
+                                        rowIndexesB =
+                                            1
+                                            2
+                                            3
+                                            4
+
+                                e.g. Perform an inner join with multiple key variables.
+                                    tableA = table([1 2 3 4 5]',...
+                                                   {'B' 'C' 'A' 'G' 'D'}',...
+                                                   [false, false, true, true, false]',...
+                                                   'VariableNames', {'VAR_1', 'VAR_2', 'VAR_3'})
+                                        VAR-1    VAR-2    VAR-3
+                                        -----    -----    -----
+                                        1        'B'      false
+                                        2        'C'      false
+                                        3        'A'      true
+                                        4        'G'      true
+                                        5        'D'      false
+
+                                    tableB = table({'A' 'B' 'C' 'D' 'E' 'F'}',...
+                                                   [true, false, true, true, false, true]',...
+                                                   [5.23, 7.49, 3.16, 4.83, 2.94, 9.71]',...
+                                                   'VariableNames', {'VAR_2', 'VAR_3', 'VAR_4'})
+                                        VAR-2    VAR-3    VAR-4
+                                        -----    -----    -----
+                                        'A'      true     5.23
+                                        'B'      false    7.49
+                                        'C'      true     3.16
+                                        'D'      true     4.83
+                                        'E'      false    2.94
+                                        'F'      true     9.71
+
+                                    innerjoin(tableA, tableB)
+                                        VAR-1    VAR-2    VAR-3    VAR-4
+                                        -----    -----    -----    -----
+                                        3        'A'      true     5.23
+                                        1        'B'      false    7.49
+
+                                e.g. Perform an inner join, specifying the key variables respectively of both tables.
+                                    tableA = table([1 2 3 4 5]',...
+                                                   {'B' 'C' 'A' 'G' 'D'}')
+                                        Var1    Var2
+                                        ----    ----
+                                        1       'B'
+                                        2       'C'
+                                        3       'A'
+                                        4       'G'
+                                        5       'D'
+
+                                    tableB = table([true, false, true, true, false]',...
+                                                   [7 4 3 2 6]')
+                                        Var1    Var2
+                                        -----   ----
+                                        true    7
+                                        false   4
+                                        true    3
+                                        true    2
+                                        false   6
+
+                                    innerjoin(tableA, tableB, 'LeftKeys', 1, 'RightKeys', 2)
+                                        Var1-tableA    Var2    Var1-tableB
+                                        -----------    ----    -----------
+                                        2              'C'     true
+                                        3              'A'     true
+                                        4              'G'     false
+
+                                e.g. Perform an inner join on timetables.
+                                    tableA = timetable(seconds([1 2 3 4]'), ['A' 'B' 'C' 'D']')
+                                         Time    Var1
+                                        -----    ----
+                                        1 sec    A
+                                        2 sec    B
+                                        3 sec    C
+                                        4 sec    D
+
+                                    tableB = timetable(seconds([2 3 4 5]'), [true false true false]')
+                                         Time    Var1
+                                        -----    -----
+                                        2 sec    true
+                                        3 sec    false
+                                        4 sec    true
+                                        5 sec    false
+
+                                    innerjoin(tableA, tableB)
+                                         Time    Var1-tableA    Var1-tableB
+                                        -----    -----------    -----------
+                                        2 sec    B              true
+                                        3 sec    C              false
+                                        4 sec    D              true
+
+  ----          outerjoin       Perform outer join between two tables/timetables and return the result.
+
+                                The result is the outer join between the two tables/timetables, by matching up rows using all the variables with the same name as key variables (or the specified key variables).
+                                The result retains all rows existing in either of the two tables/timetables.
+
+                                e.g. Perform a normal outer join.
+                                    tableA = table([1 2 3 4 5]',...
+                                                   {'B' 'C' 'A' 'G' 'D'}',...
+                                                   'VariableNames', {'VAR_1', 'VAR_2'})
+                                        VAR-1    VAR-2
+                                        -----    -----
+                                        1        'B'
+                                        2        'C'
+                                        3        'A'
+                                        4        'G'
+                                        5        'D'
+
+                                    tableB = table({'A' 'B' 'C' 'D' 'E' 'F'}',...
+                                                   [true, false, true, true, false, true]',...
+                                                   [5.23, 7.49, 3.16, 4.83, 2.94, 9.71]',...
+                                                   'VariableNames', {'VAR_2', 'VAR_3', 'VAR_4'})
+                                        VAR-2    VAR-3    VAR-4
+                                        -----    -----    -----
+                                        'A'      true     5.23
+                                        'B'      false    7.49
+                                        'C'      true     3.16
+                                        'D'      true     4.83
+                                        'E'      false    2.94
+                                        'F'      true     9.71
+
+                                    outerjoin(tableA, tableB)
+                                        % - The rows containing the unmatched key variable values are still included in the result,
+                                            but these kind of rows normally contain missing non-key variable values.
+                                        % - For unmatched values in key variables, all missing values are filled with values per following rules.
+                                            - If the missing value is a numeric, fill it with a NaN;
+                                            - If the missing value is a string, fill it with an empty string ('');
+                                            - If the missing value is a logical, fill it with a logical 0 (false).
+                                        VAR_1    VAR_2_tableA    VAR_2_tableB    VAR_3    VAR_4
+                                        -----    ------------    ------------    -----    -----
+                                        3        'A'             'A'             true     5.23
+                                        1        'B'             'B'             false    7.49
+                                        2        'C'             'C'             true     3.16
+                                        5        'D'             'D'             true     4.83
+                                        NaN      ''              'E'             false    2.94
+                                        NaN      ''              'F'             true     9.71
+                                        4        'G'             ''              false    NaN
+
+                                    --------------------------------------------
+
+                                    % Get row indexes in tableA and tableB, together with the outer join result.
+                                    [result, rowIndexesA, rowIndexesB] = outerjoin(tableA, tableB)
+                                        % Indexes of rows containing the unmatched key variable values are all zeros.
+                                        result =
+                                            VAR_1    VAR_2_tableA    VAR_2_tableB    VAR_3    VAR_4
+                                            -----    ------------    ------------    -----    -----
+                                            3        'A'             'A'             true     5.23
+                                            1        'B'             'B'             false    7.49
+                                            2        'C'             'C'             true     3.16
+                                            5        'D'             'D'             true     4.83
+                                            NaN      ''              'E'             false    2.94
+                                            NaN      ''              'F'             true     9.71
+                                            4        'G'             ''              false    NaN
+
+                                        rowIndexesA =
+                                            3
+                                            1
+                                            2
+                                            5
+                                            0
+                                            0
+                                            4
+
+                                        rowIndexesB =
+                                            1
+                                            2
+                                            3
+                                            4
+                                            5
+                                            6
+                                            0
+
+                                e.g. Perform an outer join with multiple key variables.
+                                    tableA = table([1 2 3 4 5]',...
+                                                   {'B' 'C' 'A' 'G' 'D'}',...
+                                                   [false, false, true, true, false]',...
+                                                   'VariableNames', {'VAR_1', 'VAR_2', 'VAR_3'})
+                                        VAR-1    VAR-2    VAR-3
+                                        -----    -----    -----
+                                        1        'B'      false
+                                        2        'C'      false
+                                        3        'A'      true
+                                        4        'G'      true
+                                        5        'D'      false
+
+                                    tableB = table({'A' 'B' 'C' 'D' 'E' 'F'}',...
+                                                   [true, false, true, true, false, true]',...
+                                                   [5.23, 7.49, 3.16, 4.83, 2.94, 9.71]',...
+                                                   'VariableNames', {'VAR_2', 'VAR_3', 'VAR_4'})
+                                        VAR-2    VAR-3    VAR-4
+                                        -----    -----    -----
+                                        'A'      true     5.23
+                                        'B'      false    7.49
+                                        'C'      true     3.16
+                                        'D'      true     4.83
+                                        'E'      false    2.94
+                                        'F'      true     9.71
+
+                                    outerjoin(tableA, tableB)
+                                        VAR_1    VAR_2_tableA    VAR_3_tableA    VAR_2_tableB    VAR_3_tableB    VAR_4
+                                        -----    ------------    ------------    ------------    ------------    -----
+                                          3      'A'             true            'A'             true            5.23
+                                          1      'B'             false           'B'             false           7.49
+                                          2      'C'             false           ''              false            NaN
+                                        NaN      ''              false           'C'             true            3.16
+                                          5      'D'             false           ''              false            NaN
+                                        NaN      ''              false           'D'             true            4.83
+                                        NaN      ''              false           'E'             false           2.94
+                                        NaN      ''              false           'F'             true            9.71
+                                          4      'G'             true            ''              false            NaN
+
+                                e.g. Perform an outer join, specifying the key variables respectively of both tables.
+                                    tableA = table([1 2 3 4 5]',...
+                                                   {'B' 'C' 'A' 'G' 'D'}')
+                                        Var1    Var2
+                                        ----    ----
+                                        1       'B'
+                                        2       'C'
+                                        3       'A'
+                                        4       'G'
+                                        5       'D'
+
+                                    tableB = table([true, false, true, true, false]',...
+                                                   [7 4 3 2 6]')
+                                        Var1    Var2
+                                        -----   ----
+                                        true    7
+                                        false   4
+                                        true    3
+                                        true    2
+                                        false   6
+
+                                    outerjoin(tableA, tableB, 'LeftKeys', 1, 'RightKeys', 2)
+                                        Var1-tableA    Var2-tableA    Var1-tableB    Var2-tableB
+                                        -----------    -----------    -----------    -----------
+                                          1            'B'            false          NaN
+                                          2            'C'            true             2
+                                          3            'A'            true             3
+                                          4            'G'            false            4
+                                          5            'D'            false          NaN
+                                        NaN            ''             false            6
+                                        NaN            ''             true             7
+
+                                e.g. Perform an outer join on timetables.
+                                    tableA = timetable(seconds([1 2 3 4]'), ['A' 'B' 'C' 'D']')
+                                         Time    Var1
+                                        -----    ----
+                                        1 sec    A
+                                        2 sec    B
+                                        3 sec    C
+                                        4 sec    D
+
+                                    tableB = timetable(seconds([2 3 4 5]'), [true false true false]')
+                                         Time    Var1
+                                        -----    -----
+                                        2 sec    true
+                                        3 sec    false
+                                        4 sec    true
+                                        5 sec    false
+
+                                    outerjoin(tableA, tableB)
+                                         Time    Var1-tableA    Var1-tableB
+                                        -----    -----------    -----------
+                                        1 sec    A              false
+                                        2 sec    B              true
+                                        3 sec    C              false
+                                        4 sec    D              true
+                                        5 sec                   false
 
 ========================================
 Function List
