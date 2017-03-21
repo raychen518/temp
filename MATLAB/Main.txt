@@ -4857,7 +4857,270 @@ Line Specification
                                 <For the content, see Function List - Matrices and Arrays - Reshape and Rearrange - issorted>
 
   ----          ismember        Determine whether an array's elements are members of another array.
+
+                                e.g. Test vectors.
+                                    data1 = [1 2 3 4 5];
+                                    data2 = [1 3 5 7 9 11 13];
+
+                                    ismember(data1, data2)
+                                        <1x5 logical array>
+                                        1   0   1   0   1
+
+                                    --------------------------------------------
+
+                                    data1 = [1 2 3 4 5]';
+                                    data2 = [1 3 5 7 9 11 13];
+
+                                    ismember(data1, data2)
+                                        <5x1 logical array>
+                                        1
+                                        0
+                                        1
+                                        0
+                                        1
+
+                                e.g. Test arrays.
+                                    data1 = [1 2 3; 4 5 6; 7 8 9]
+                                        1     2     3
+                                        4     5     6
+                                        7     8     9
+
+                                    data2 = [1 6 7 11; 2 6 9 12]
+                                        1     6     7    11
+                                        2     6     9    12
+
+                                    ismember(data1, data2)
+                                        <3x3 logical array>
+                                        1   1   0
+                                        0   0   1
+                                        1   0   1
+
+                                    [testResultForData1, lowestElementIndexesInData2] = ismember(data1, data2)
+                                        testResultForData1
+                                            <3x3 logical array>
+                                            1   1   0
+                                            0   0   1
+                                            1   0   1
+
+                                        lowestElementIndexesInData2
+                                            1   2   0
+                                            0   0   3
+                                            5   0   6
+
+                                        Elements in data2
+                                        Index   Value   Found
+                                        ----------------------------------------
+                                        1       1       Yes
+                                        2       2       Yes
+                                        3       6       Yes
+                                        4       6
+                                        5       7       Yes
+                                        6       9       Yes
+                                        7       11
+                                        8       12
+                                        ----------------------------------------
+
+                                e.g. Test arrays (treating each row as a unit).
+                                    data1 = [1 2 3; 4 5 6; 7 8 9]
+                                        1     2     3
+                                        4     5     6
+                                        7     8     9
+
+                                    data2 = [1 1 1; 4 5 6; 2 2 2]
+                                        1     1     1
+                                        4     5     6
+                                        2     2     2
+
+                                    ismember(data1, data2)
+                                        <3x3 logical array>
+                                        1   1   0
+                                        1   1   1
+                                        0   0   0
+
+                                    ismember(data1, data2, 'rows')
+                                        <3x1 logical array>
+                                        0
+                                        1
+                                        0
+
+                                    [testResultForData1, lowestRowIndexesInData2] = ismember(data1, data2, 'rows')
+                                        testResultForData1
+                                            <3x1 logical array>
+                                            0
+                                            1
+                                            0
+
+                                        lowestRowIndexesInData2
+                                            0
+                                            2
+                                            0
+
+                                e.g. Test arrays (tables).
+                                    data1 = table([1:5]', ['A':'E']', [false true false true false]')
+                                        Var1    Var2    Var3
+                                        ----    ----    -----
+                                        1       A       false
+                                        2       B       true
+                                        3       C       false
+                                        4       D       true
+                                        5       E       false
+
+                                    data2 = table([1:2:9]', ['A':2:'I']', false(5, 1))
+                                        Var1    Var2    Var3
+                                        ----    ----    -----
+                                        1       A       false
+                                        3       C       false
+                                        5       E       false
+                                        7       G       false
+                                        9       I       false
+
+                                    ismember(data1, data2)
+                                        <5x1 logical array>
+                                        1
+                                        0
+                                        1
+                                        0
+                                        1
+
   ----          ismembertol     Determine whether an array's elements are members of another array, within tolerance.
+                                Notes:
+                                - 2 values, X (from the array A) and Y (from the array B), are within tolerance if they satisfy the following expression.
+                                    abs(X - Y) <= toleranceValue * max(abs([A(:); B(:)]))
+                                - If a tolerance value is not provided, a default tolerance value is used, as follows.
+                                  - For single-precision inputs: 1e-6
+                                  - For double-precision inputs: 1e-12
+
+                                e.g. Test vectors.
+                                    data1 = [1 2 3 4 5];
+                                    data2 = [1 3 5 7 9 11 13];
+
+                                    ismembertol(data1, data2)
+                                        <1x5 logical array>
+                                        1   0   1   0   1
+
+                                    --------------------------------------------
+
+                                    data1 = [1 2 3 4 5]';
+                                    data2 = [1 3 5 7 9 11 13];
+
+                                    ismembertol(data1, data2)
+                                        <5x1 logical array>
+                                        1
+                                        0
+                                        1
+                                        0
+                                        1
+
+                                    --------------------------------------------
+
+                                    data1 = [1 2 3 4 5 6] * pi
+                                        3.1416    6.2832    9.4248   12.5664   15.7080   18.8496
+
+                                    data2 = 10 .^ log10(data1)
+                                        3.1416    6.2832    9.4248   12.5664   15.7080   18.8496
+
+                                    % Though looking same, the variables "data1" and "data2" are actually not equal, proved by the following command and its output.
+                                    data1 - data2
+                                        <1.0e-14 *>
+                                        0.0444         0         0         0         0   -0.3553
+
+                                    ismember(data1, data2)
+                                        <1x6 logical array>
+                                        0   1   1   1   1   0
+
+                                    ismembertol(data1, data2)
+                                        <1x6 logical array>
+                                        1   1   1   1   1   1
+
+                                    --------------------------------------------
+
+                                    data1 = [1 1.5 3 4.5 5]
+                                        1.0000    1.5000    3.0000    4.5000    5.0000
+
+                                    data2 = [1 2 3 4 5]
+                                        1     2     3     4     5
+
+                                    ismembertol(data1, data2)
+                                        <1x5 logical array>
+                                        1   0   1   0   1
+
+                                    ismembertol(data1, data2, 0.1)
+                                        ------------------------------------------------------------
+                                        MC: 0.1 * max(abs([data1(:); data2(:)])) -> 0.5
+                                        MC: abs(2 - 1.5000) <= 0.5  Yes
+                                        MC: abs(4.5 - 4) <= 0.5     Yes
+                                        ------------------------------------------------------------
+                                        <1x5 logical array>
+                                        1   1   1   1   1
+
+                                e.g. Test arrays.
+                                    data1 = [1 2 3; 4 5 6; 7 8 9]
+                                        1     2     3
+                                        4     5     6
+                                        7     8     9
+
+                                    data2 = [1 6 7 11; 2 6 9 12]
+                                        1     6     7    11
+                                        2     6     9    12
+
+                                    ismembertol(data1, data2)
+                                        <3x3 logical array>
+                                        1   1   0
+                                        0   0   1
+                                        1   0   1
+
+                                    [testResultForData1, lowestElementIndexesInData2] = ismembertol(data1, data2)
+                                        testResultForData1
+                                            <3x3 logical array>
+                                            1   1   0
+                                            0   0   1
+                                            1   0   1
+
+                                        lowestElementIndexesInData2
+                                            1   2   0
+                                            0   0   3
+                                            5   0   6
+
+                                        Elements in data2
+                                        Index   Value   Found
+                                        ----------------------------------------
+                                        1       1       Yes
+                                        2       2       Yes
+                                        3       6       Yes
+                                        4       6
+                                        5       7       Yes
+                                        6       9       Yes
+                                        7       11
+                                        8       12
+                                        ----------------------------------------
+
+                                    --------------------------------------------
+
+                                    data1 = [1 2 3; 4 5 6; 7 8 9]
+                                        1     2     3
+                                        4     5     6
+                                        7     8     9
+
+                                    data2 = [1 1 1; 4 5 6; 2 2 2]
+                                        1     1     1
+                                        4     5     6
+                                        2     2     2
+
+                                    ismembertol(data1, data2)
+                                        <3x3 logical array>
+                                        1   1   0
+                                        1   1   1
+                                        0   0   0
+
+                                    ismembertol(data1, data2, 'rows')
+                                        <Error: Tolerance value TOL must be a real, full (non-sparse), positive numeric scalar of type single or double.>
+
+                                    ismembertol(data1, data2, 'ByRows', true)
+                                        <3x1 logical array>
+                                        0
+                                        1
+                                        0
+
   ----          unique          Determine unique array elements.
   ----          uniquetol       Determine unique array elements, within tolerance.
   ----          union           Set union of two arrays.
