@@ -7270,6 +7270,11 @@ Study Notes
 Contents
 Demos
 
+Legends
+--------------------
+!   Important/Helpful
+~   Viewed/Watched
+
 Contents
     Here are Psychtoolbox folders and their contents.
     <from the command "help Psychtoolbox">
@@ -7318,8 +7323,16 @@ Demos
     <from the command "help PsychDemos">
     Demo                        Description                                                     Description (Chinese)
     ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-!   PsychExampleExperiments     - Subfolder with real experiment scripts for different tasks, contributed by users.
+!~  PsychExampleExperiments     - Subfolder with real experiment scripts for different tasks, contributed by users.
                                                                                                 由用户提供的、使用在不同任务中的、真实的实验脚本。
+~       MinimumMotionExp        - Contains "Minimum motion luminance measurement" procedure, workable on both a standard display and the CRS Bits++ system.
+                                                                                                包含“最小运动亮度测量”程序，在标准显示和CRS Bits++系统上都能运行。
+                                                                                                MC: 可能会显示一个逆时针旋转的圆形，其圆心处有一个黑色小方块。
+!~      MullerLyerIllusion      - Demonstration of MullerLyerIllusion, packed into a nice complete experiment.
+                                                                                                关于“穆勒莱尔错觉”的演示（已经包装成一个很好且完整的实验）。
+                                                                                                MC: 会显示一些线条组成的图形，并要求用户按键来判断图形是否等长。
+!~      OldNewRecognition       - Subfolder contains simple old-/new- recognition experiment.   【子目录】包含简单的新旧识别实验。
+                                                                                                MC: 会首先显示一些图片，其后显示更多的图片，用户需要按键来判断哪些图片之前显示过。
 
     AlphaImageDemo              - Simple demo of OpenGL alpha blending.                         【子目录】关于OpenGL阿尔法混合的简单演示。
     AlphaRotateDemo             - A variant of AlphaImageDemoOSX, demonstrates rotated drawing. 关于绘图旋转的演示（本演示是“AlphaImageDemo”演示的变体）。
@@ -7369,16 +7382,22 @@ Demos
                                 - Manually anti-alias text for special purpose applications.    关于为具有特殊用途的应用程序手动绘制抗锯齿文本的演示。
     DrawMirroredTextDemo        - Shows how to draw horizontally mirrored text.                 关于绘制横向镜像的文本的演示。
     DrawSomeTextDemo            - Very simple example of using 'DrawText'.                      关于使用DrawText函数的极简单例子的演示。
-    DriftDemo                   - Animation of grating using textures.                          关于使用纹理创建光栅动画的演示。
-    DriftDemo2                  - More efficient animation of gratings using one texture.       关于使用纹理创建更高效的光栅动画的演示。
-    DriftDemo3                  - Even more efficient animation of gratings under some constraints.
+!~  DriftDemo                   - Animation of grating using textures.                          关于使用纹理创建光栅动画的演示。
+                                                                                                MC: 会显示一个不断移动的斜向光栅。
+!~  DriftDemo2                  - More efficient animation of gratings using one texture.       关于使用纹理创建更高效的光栅动画的演示。
+                                                                                                MC: 会显示一个不断移动的斜向光栅（速率较慢）。
+!~  DriftDemo3                  - Even more efficient animation of gratings under some constraints.
                                                                                                 关于在某些限制下创建更更高效的光栅动画的演示。
-    DriftDemo4                  - Very efficient animation of gratings on graphics hardware with shader support.
+                                                                                                MC: 会显示一个不断移动的竖向光栅（速率较慢）。
+!~  DriftDemo4                  - Very efficient animation of gratings on graphics hardware with shader support.
                                                                                                 关于在有着色器支持的图形硬件上创建非常高效的光栅动画的演示。
-    DriftDemo5                  - Animation of dual-gratings via use of alpha blending and color masking.
+                                                                                                MC: 会显示一个不断移动的竖向光栅（光栅非常粗）。
+!~  DriftDemo5                  - Animation of dual-gratings via use of alpha blending and color masking.
                                                                                                 关于使用阿尔法混合和颜色遮蔽创建双光栅动画的演示。
-    DriftDemo6                  - Very efficient animation of dual-gratings on graphics hardware with shader support.
+                                                                                                MC: 会显示内外2个圆形，外圆和内圆之间显示不断移动的斜向光栅（速率较慢），内圆内显示不断移动的横向光栅（速率较慢）。
+!~  DriftDemo6                  - Very efficient animation of dual-gratings on graphics hardware with shader support.
                                                                                                 关于在有着色器支持的图形硬件上创建非常高效的双光栅动画的演示。
+                                                                                                MC: 会显示内外2个圆形，外圆和内圆之间显示不断移动的斜向光栅（速率较慢），内圆内也显示不断移动的斜向光栅（速率较慢）。
     DriftWaitDemo               - Show how to optimally time animations.                        关于用最佳方式设置动画等待的演示。
     ErrorCatchDemo              - How to handle errors gracefully (try/catch).                  关于优雅地处理错误（使用try/catch语句块）的演示。
     ExpandingRingsDemo          - Shows how GLSL procedural textures can be used to create some expanding rings stimulus.
@@ -7394,10 +7413,11 @@ Demos
     GLSLCLUTAnimDemo            - Demonstrates use of function moglClutBlit to perform CLUT animation with GLSL in an OS independent way.
                                                                                                 关于使用“moglClutBlit”函数和GLSL，以独立于操作系统的方式，表演颜色查找表动画的演示。
     GPGPUDemos                  - Demos for use of GPGPU computing with Psychtoolbox.           【子目录】关于使用GPGPU计算的多个演示。
-    GratingDemo                 - Basic display of a grating on the screen.                     关于一条光栅在屏幕上的基本显示的演示。
+!~  GratingDemo                 - Basic display of a grating on the screen.                     关于一个光栅在屏幕上的基本显示的演示。
+                                                                                                MC: 会显示一个静止的斜向光栅。
     IsomerizationsInDishDemo    - Compute photoreceptor isomerizations for retina in a dish.    关于计算鱼视网膜的感光器异构化的演示。
     IsomerizationsInEyeDemo     - Compute photoreceptor isomerizations for human eye.           关于计算人类眼睛的感光器异构化的演示。
-    KbDemo                      - Demonstrate KbCheck, KbName, KbWait.                          关于KbCheck、KbName和KbWait函数（这几个函数都是底层的、用来处理键盘信息的函数）的演示。
+!   KbDemo                      - Demonstrate KbCheck, KbName, KbWait.                          关于KbCheck、KbName和KbWait函数（这几个函数都是底层的、用来处理键盘信息的函数）的演示。
     KinectDemo                  - Capture and display video and depths data from a Kinect box.  关于通过Kinect捕捉以及显示视频和深度数据的演示。
     Kinect3DDemo                - Capture data from a Kinect box and view it as a textured 3D point-cloud or mesh.
                                                                                                 关于通过Kinect捕捉数据并将数据作为有纹理的三维点云或网格来查看的演示。
@@ -7474,7 +7494,7 @@ Demos
                                                                                                   Kinect起初只能用在微软的Xbox游戏机上，现在已经能用在其他各个领域。
                                                                                                 - Mandelbrot (Benoit Mandelbrot, 本华·曼德博), 法国和美国籍波兰裔犹太人数学家。
                                                                                                   他最大的成就是创立了分形几何，创造了“分形”这个名词，描述了曼德博集合。
-                                                                                                - Mandelbrot set, 曼德博集合。
+                                                                                                - Mandelbrot Set (曼德博集合／曼德勃罗集合／曼德布洛特集合)，是一种在复平面上组成分形的点的集合，是一种分形图案。
                                                                                                 - MOGL, 是一个包含了多个M文件包装器和一个MEX文件的集合，通过它可以在MATLAB中调用所有OpenGL命令。
                                                                                                 - RTBox, 这里的RTBox指的是“USTC - RTBox”反应时间盒（Reaction Time Box），
                                                                                                   一种用来从实验对象处收集响应信息的、高计时精度的响应按钮盒（Response Button Box）。
